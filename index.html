@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETAs at FINN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+      background: #0d0d0d;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Deck ─────────────────────────────────────────────── */
+    #deck { position: relative; width: 100%; height: 100%; overflow: hidden; }
+
+    /* ── Slides ───────────────────────────────────────────── */
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 88px 128px;
+      transform: translateX(100%);
+      will-change: transform;
+    }
+    .slide.animated { transition: transform 0.58s cubic-bezier(0.77, 0, 0.175, 1); }
+    .slide.center { align-items: center; text-align: center; }
+
+    /* ── Fixed chrome ─────────────────────────────────────── */
+    #logo {
+      position: fixed; top: 36px; left: 48px; z-index: 300;
+      font-size: 16px; font-weight: 800; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.9);
+    }
+    #section-tag {
+      position: fixed; top: 40px; right: 48px; z-index: 300;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: #2e2e2e;
+      transition: opacity 0.3s;
+    }
+    #progress {
+      position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 7px; align-items: center; z-index: 300;
+    }
+    .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #252525; cursor: pointer;
+      transition: background 0.3s, width 0.35s, border-radius 0.35s;
+    }
+    .dot.active { width: 24px; background: #0055FF; border-radius: 3px; }
+    #slide-num {
+      position: fixed; bottom: 36px; right: 48px; z-index: 300;
+      font-size: 11px; color: #252525;
+      font-variant-numeric: tabular-nums; font-weight: 500;
+    }
+
+    /* Nav arrows (appear on hover) */
+    .nav-btn {
+      position: fixed; top: 50%; z-index: 300;
+      transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.04); color: #3a3a3a;
+      font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s, background 0.2s, color 0.2s;
+    }
+    #deck:hover .nav-btn { opacity: 1; }
+    .nav-btn:hover { background: rgba(255,255,255,0.09); color: #fff; }
+    #prev-btn { left: 18px; }
+    #next-btn { right: 18px; }
+
+    /* ── Typography ───────────────────────────────────────── */
+    .eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: #0055FF; margin-bottom: 26px;
+    }
+    .rule { width: 36px; height: 3px; background: #0055FF; border-radius: 2px; margin-bottom: 36px; }
+
+    h1 { font-size: 80px; font-weight: 800; line-height: 1.0; letter-spacing: -2.5px; }
+    h2 { font-size: 54px; font-weight: 700; line-height: 1.06; letter-spacing: -1.8px; }
+
+    .subtitle {
+      font-size: 20px; color: #888; font-weight: 400;
+      margin-top: 18px; line-height: 1.55; max-width: 620px;
+    }
+
+    /* ── Stats ────────────────────────────────────────────── */
+    .stats-row { display: flex; gap: 0; margin-top: 56px; align-items: flex-end; }
+    .stat-block { display: flex; flex-direction: column; padding-right: 56px; }
+    .stat-block + .stat-block { padding-left: 56px; padding-right: 56px; border-left: 1px solid #1c1c1c; }
+    .stat-block:last-child { padding-right: 0; }
+
+    .stat-num {
+      font-size: 68px; font-weight: 800; letter-spacing: -2.5px; line-height: 1;
+    }
+    .stat-num.blue  { color: #0055FF; }
+    .stat-num.dim   { color: #2a2a2a; }
+
+    .stat-label {
+      font-size: 11px; color: #666; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.14em; margin-top: 10px;
+    }
+    .stat-note {
+      font-size: 12px; color: #555; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-top: 20px;
+    }
+
+    /* ── Deviation cards ──────────────────────────────────── */
+    .dev-grid { display: flex; gap: 20px; margin-top: 44px; width: 100%; }
+    .dev-card {
+      flex: 1;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid #1a1a1a; border-radius: 18px;
+      padding: 32px 32px 36px;
+    }
+    .dev-card-title { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 5px; }
+    .dev-card-sub   { font-size: 13px; color: #777; margin-bottom: 28px; line-height: 1.4; }
+    .dev-timeline   { position: relative; height: 52px; }
+    .dev-axis       { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #1e1e1e; }
+    .dev-range      { position: absolute; top: calc(50% - 3px); height: 6px; border-radius: 3px; }
+    .dev-range.wide   { width: 82%; left: 9%; background: rgba(0,85,255,0.35); }
+    .dev-range.narrow { width: 28%; left: 36%; background: #0055FF; }
+    .dev-pin        { position: absolute; top: 15%; bottom: 15%; width: 2px; left: calc(50% - 1px); background: #0055FF; border-radius: 1px; }
+    .dev-ticks      { display: flex; justify-content: space-between; margin-top: 10px; }
+    .dev-tick       { font-size: 11px; color: #555; }
+    .dev-example    { font-size: 13px; color: #444; margin-top: 18px; line-height: 1.5; }
+    .dev-example strong { color: #888; font-weight: 600; }
+
+    /* ── Bullet list ──────────────────────────────────────── */
+    .points { display: flex; flex-direction: column; gap: 18px; margin-top: 44px; }
+    .point  { display: flex; align-items: flex-start; gap: 16px; }
+    .pt     { width: 5px; height: 5px; border-radius: 50%; background: #0055FF; flex-shrink: 0; margin-top: 11px; }
+    .pt-text { font-size: 22px; font-weight: 400; color: #888; line-height: 1.35; }
+    .pt-text strong { color: #fff; font-weight: 600; }
+
+    /* ── Timeline (process steps) ─────────────────────────── */
+    .timeline { display: flex; flex-direction: column; margin-top: 44px; }
+    .tl-row   { display: flex; gap: 24px; align-items: flex-start; }
+    .tl-left  { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
+    .tl-circle {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: #0055FF; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+    }
+    .tl-line  { width: 1px; flex: 1; min-height: 24px; background: #1a1a1a; }
+    .tl-body  { padding-top: 6px; padding-bottom: 32px; }
+    .tl-title { font-size: 20px; font-weight: 600; color: #fff; line-height: 1.3; }
+    .tl-sub   { font-size: 14px; color: #666; margin-top: 5px; }
+
+    /* ── Callout box ──────────────────────────────────────── */
+    .callout {
+      display: inline-flex; align-items: center; gap: 20px;
+      background: rgba(0,85,255,0.08); border: 1px solid rgba(0,85,255,0.16);
+      border-radius: 16px; padding: 22px 30px; margin-top: 28px;
+    }
+    .callout-label { font-size: 10px; color: #0055FF; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 8px; }
+    .callout-nums  { display: flex; align-items: center; gap: 12px; }
+    .c-from { font-size: 26px; font-weight: 700; color: #2e2e2e; }
+    .c-arr  { font-size: 18px; color: #0055FF; }
+    .c-to   { font-size: 42px; font-weight: 800; color: #fff; letter-spacing: -1.5px; }
+    .callout-ctx { font-size: 12px; color: #333; margin-top: 4px; }
+
+    /* ── Brand badges ─────────────────────────────────────── */
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+    }
+    .badge::before { content:''; width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+    .badge.auto { background: rgba(0,85,255,0.1); color: #5588FF; border: 1px solid rgba(0,85,255,0.22); }
+    .badge.auto::before { background: #0055FF; }
+    .badge.manu { background: rgba(255,255,255,0.03); color: #383838; border: 1px solid rgba(255,255,255,0.07); }
+    .badge.manu::before { background: #2a2a2a; }
+
+    /* ── Screenshot wrapper ───────────────────────────────── */
+    .img-wrap {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid #1a1a1a;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+      flex-shrink: 0;
+    }
+    .img-wrap img { display: block; width: 100%; height: auto; }
+
+    /* ── Metric definition ────────────────────────────────── */
+    .metric-def {
+      border-left: 3px solid #0055FF; padding-left: 22px;
+      font-size: 19px; color: #888; line-height: 1.65;
+      max-width: 600px; margin-top: 30px;
+    }
+    .metric-def strong { color: #aaa; font-weight: 600; }
+
+    /* ── Q&A ──────────────────────────────────────────────── */
+    .qa-q { font-size: 100px; font-weight: 800; letter-spacing: -4px; line-height: 1; }
+    .qa-sub { font-size: 20px; color: #555; margin-top: 24px; }
+
+    /* ── Section divider slide ────────────────────────────── */
+    .section-num {
+      font-size: 160px; font-weight: 900; letter-spacing: -8px;
+      line-height: 1; color: #111; position: absolute;
+      right: 100px; bottom: 60px;
+      user-select: none; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="logo">FINN</div>
+<div id="section-tag"></div>
+<div id="progress"></div>
+<div id="slide-num"></div>
+
+<div id="deck">
+  <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592;</button>
+  <button class="nav-btn" id="next-btn" onclick="navigate(1)">&#8594;</button>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 1 — TITLE
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide center" data-section="">
+    <div class="rule" style="margin: 0 auto 40px;"></div>
+    <h1>ETAs at FINN</h1>
+    <p class="subtitle" style="text-align:center; margin: 20px auto 0; font-size:18px; max-width:460px;">
+      What they are, how we build them,<br>and how we keep them updated.
+    </p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 2 — WHAT IS AN ETA
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="What is an ETA?">
+    <div class="eyebrow">01 &mdash; What is an ETA?</div>
+    <h2>A prediction.<br>Not a promise.</h2>
+    <p class="subtitle">An ETA is our best estimate of when a vehicle arrives. It shapes customer expectations — and drives fleet activations.</p>
+
+    <div class="stats-row">
+      <div class="stat-block">
+        <div class="stat-num dim">25.9%</div>
+        <div class="stat-label">Early arrivals</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num blue">54.6%</div>
+        <div class="stat-label">On-time arrivals</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num dim">19.6%</div>
+        <div class="stat-label">Late arrivals</div>
+      </div>
+    </div>
+    <p class="stat-note">Every prediction tracked &mdash; not just the last one</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 3 — MISSION / DEVIATION CONCEPT
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="What is an ETA?">
+    <div class="eyebrow">01 &mdash; Our Mission</div>
+    <h2>The most realistic<br>prediction possible.</h2>
+
+    <div class="dev-grid">
+      <div class="dev-card">
+        <div class="dev-card-title">Uncertain &rarr; show a wide range</div>
+        <div class="dev-card-sub">Don't suggest certainty where there isn't any.</div>
+        <div class="dev-timeline">
+          <div class="dev-axis"></div>
+          <div class="dev-range wide"></div>
+          <div class="dev-pin"></div>
+        </div>
+        <div class="dev-ticks">
+          <span class="dev-tick">&minus;4 wks</span>
+          <span class="dev-tick">Most Likely ETA</span>
+          <span class="dev-tick">+4 wks</span>
+        </div>
+      </div>
+      <div class="dev-card">
+        <div class="dev-card-title">Confident &rarr; show a narrow range</div>
+        <div class="dev-card-sub">Signal precision where the data supports it.</div>
+        <div class="dev-timeline">
+          <div class="dev-axis"></div>
+          <div class="dev-range narrow"></div>
+          <div class="dev-pin"></div>
+        </div>
+        <div class="dev-ticks">
+          <span class="dev-tick">&minus;4 wks</span>
+          <span class="dev-tick">Most Likely ETA</span>
+          <span class="dev-tick">+4 wks</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#555; margin-top:18px; text-transform:uppercase; letter-spacing:0.12em; font-weight:500;">Target: maximum efficient activations &middot; no unnecessary customer delays</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 4 — LIMITATIONS
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="What is an ETA?">
+    <div class="eyebrow">01 &mdash; Limitations</div>
+    <h2>What we can't<br>fully control.</h2>
+    <div class="points">
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Production disruptions</strong> &mdash; strikes or part shortages at OEM plants</div>
+      </div>
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Blocked logistics routes</strong> &mdash; Suez, Red Sea, or other sea route disruptions</div>
+      </div>
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Limited OEM data</strong> &mdash; not every manufacturer shares real-time production status</div>
+      </div>
+    </div>
+    <p class="subtitle" style="margin-top:40px; font-size:16px;">Global supply chains are inherently unpredictable. Our role: be as accurate as possible within those constraints.</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 5 — HOW WE BUILT IT
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="The Model">
+    <div class="eyebrow">02 &mdash; How We Built It</div>
+    <h2>Q4 2025:<br>Full reset.</h2>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-circle">1</div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-title">Analyzed all historic delivery data</div>
+          <div class="tl-sub">Patterns, accuracy gaps, and brand-level deviations from 2024 onward</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-circle">2</div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-title">Aligned directly with every OEM</div>
+          <div class="tl-sub">Updated production &amp; transport data, current lead times, model-specific logic</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-circle">3</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Reset &amp; relaunched logic for all brands</div>
+          <div class="tl-sub">Shifted from "Earliest ETA" to "Most Likely ETA" with symmetric deviation windows</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11px; color:#444; margin-top:8px; text-transform:uppercase; letter-spacing:0.16em; font-weight:600;">Data team &times; CLM</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 6 — RESULTS
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="The Model">
+    <div class="eyebrow">02 &mdash; Results</div>
+    <h2>The numbers moved.</h2>
+
+    <div class="img-wrap" style="margin-top:28px; max-height:calc(100vh - 260px);">
+      <img src="Bildschirmfoto%202026-03-25%20um%2016.00.58.png"
+           alt="ETA Accuracy overview — Early 25.9% / On Time 54.6% / Late 19.6%"
+           style="max-height:calc(100vh - 280px); width:auto; max-width:100%; margin:0 auto; display:block;" />
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 7 — BRAND OVERVIEW
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="The Model">
+    <div class="eyebrow">02 &mdash; Brand Overview</div>
+    <h2>Accuracy across<br>the fleet.</h2>
+    <div class="img-wrap" style="margin-top:28px; max-height:calc(100vh - 260px);">
+      <img src="Bildschirmfoto%202026-03-25%20um%2016.01.57.png"
+           alt="ETA recovery by brand"
+           style="max-height:calc(100vh - 280px); width:auto; max-width:100%; display:block; margin:0 auto;" />
+    </div>
+    <p style="font-size:11px; color:#444; margin-top:12px; text-transform:uppercase; letter-spacing:0.12em; font-weight:500;">ETA status by brand &mdash; March 2026</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 8 — SETTING ETAs: BEST CASE
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="Setting ETAs">
+    <div class="eyebrow">03 &mdash; Setting ETAs</div>
+    <h2>Best case: automatic<br>&amp; data-driven.</h2>
+    <div class="badge-row">
+      <span class="badge auto">BMW</span>
+      <span class="badge auto">Seat</span>
+      <span class="badge auto">Cupra</span>
+      <span class="badge auto">Stellantis</span>
+    </div>
+    <div class="points" style="margin-top:30px;">
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Automatic readout</strong> of live production status directly from OEM systems</div>
+      </div>
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Model-based predictions</strong> using vehicle status, plant location &amp; transport time</div>
+      </div>
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Continuous updates</strong> as the vehicle moves: ordered &rarr; produced &rarr; in transit &rarr; arrived</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 9 — BMW EXAMPLE (technical)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="Setting ETAs">
+    <div class="eyebrow">03 &mdash; Example: BMW</div>
+    <h2>Production status<br>powers ETA logic.</h2>
+    <div class="img-wrap" style="margin-top:28px; max-height:calc(100vh - 280px);">
+      <img src="Bildschirmfoto%202026-03-25%20um%2016.11.44.png"
+           alt="BMW ETA current logic table"
+           style="max-height:calc(100vh - 300px); width:auto; max-width:100%; display:block; margin:0 auto;" />
+    </div>
+    <p style="font-size:11px; color:#252525; margin-top:12px; text-transform:uppercase; letter-spacing:0.12em; font-weight:500;">BMW: status codes map to ETA offsets automatically</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 10 — SETTING ETAs: HARD CASES
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="Setting ETAs">
+    <div class="eyebrow">03 &mdash; Setting ETAs</div>
+    <h2>Harder cases: manual,<br>every time.</h2>
+    <div class="badge-row">
+      <span class="badge manu">MG</span>
+      <span class="badge manu">BYD</span>
+      <span class="badge manu">Hyundai</span>
+      <span class="badge manu">Kia</span>
+    </div>
+    <div class="points" style="margin-top:30px;">
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>No automated data feed</strong> &mdash; no live production or transport status from OEM</div>
+      </div>
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Manual process</strong> &mdash; requires direct calls with OEMs and compounds</div>
+      </div>
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Wider ranges</strong> &mdash; uncertainty is reflected honestly in customer-facing ETAs</div>
+      </div>
+    </div>
+    <p class="subtitle" style="margin-top:36px; font-size:15px;">Ongoing OEM relationship management is critical to maintaining accuracy here.</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 11 — STEERING
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="Steering">
+    <div class="eyebrow">04 &mdash; Steering</div>
+    <h2>ETA Accuracy<br>drives every decision.</h2>
+    <div class="metric-def">
+      <strong>ETA Accuracy</strong> = % of ETA predictions<br>landing within the predicted range,<br>based on actual vehicle arrival.
+    </div>
+    <div class="points" style="margin-top:36px;">
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Every prediction counts</strong> &mdash; not just the last one before delivery</div>
+      </div>
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Continuous review</strong> &mdash; major updates at least monthly per brand</div>
+      </div>
+      <div class="point">
+        <div class="pt"></div>
+        <div class="pt-text"><strong>Data-driven adjustments</strong> &mdash; Data team provides concrete model suggestions from actuals</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 12 — ACCURACY DASHBOARD
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="Steering">
+    <div class="eyebrow">04 &mdash; Steering</div>
+    <h2>Accuracy in detail.</h2>
+    <div class="img-wrap" style="margin-top:28px; max-height:calc(100vh - 260px);">
+      <img src="Bildschirmfoto%202026-03-25%20um%2016.03.17.png"
+           alt="Detailed ETA accuracy dashboard"
+           style="max-height:calc(100vh - 280px); width:auto; max-width:100%; display:block; margin:0 auto;" />
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 13 — Q&A
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide center" data-section="">
+    <div class="rule" style="margin: 0 auto 36px;"></div>
+    <div class="qa-q">Q&amp;A</div>
+    <p class="qa-sub">Questions, pushback, ideas.</p>
+  </section>
+
+</div><!-- #deck -->
+
+<script>
+  const slides    = Array.from(document.querySelectorAll('.slide'));
+  const total     = slides.length;
+  let current     = 0;
+  let isAnimating = false;
+
+  /* ── Build progress dots ─────────────────────────────── */
+  const progressEl = document.getElementById('progress');
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.addEventListener('click', () => goTo(i));
+    progressEl.appendChild(d);
+  });
+  const dots    = Array.from(progressEl.querySelectorAll('.dot'));
+  const numEl   = document.getElementById('slide-num');
+  const secEl   = document.getElementById('section-tag');
+
+  /* ── Position all slides ─────────────────────────────── */
+  function positionSlides() {
+    slides.forEach((s, i) => {
+      if (i < current)       s.style.transform = 'translateX(-100%)';
+      else if (i === current) s.style.transform = 'translateX(0)';
+      else                   s.style.transform = 'translateX(100%)';
+    });
+  }
+
+  /* ── Update UI elements ──────────────────────────────── */
+  function updateUI() {
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    numEl.textContent = `${current + 1} / ${total}`;
+    secEl.textContent = slides[current].dataset.section || '';
+  }
+
+  /* ── Navigate to slide n ─────────────────────────────── */
+  function goTo(n) {
+    if (n < 0 || n >= total || n === current || isAnimating) return;
+    isAnimating = true;
+    current = n;
+    slides.forEach(s => s.classList.add('animated'));
+    positionSlides();
+    updateUI();
+    setTimeout(() => {
+      isAnimating = false;
+      slides.forEach(s => s.classList.remove('animated'));
+    }, 620);
+  }
+
+  function navigate(dir) { goTo(current + dir); }
+
+  /* ── Keyboard ────────────────────────────────────────── */
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); navigate(1); }
+    if (['ArrowLeft', 'ArrowUp'].includes(e.key))         { e.preventDefault(); navigate(-1); }
+  });
+
+  /* ── Touch / swipe ───────────────────────────────────── */
+  let touchX = 0;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 48) navigate(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* ── Init (no animation on first render) ─────────────── */
+  positionSlides();
+  updateUI();
+</script>
+</body>
+</html>
