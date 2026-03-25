@@ -24,7 +24,7 @@
 
     /* ── Slides ───────────────────────────────────────────── */
     .slide {
-      position: absolute; inset: 0;
+      position: absolute; inset: 0; overflow: hidden;
       display: flex; flex-direction: column; justify-content: center;
       padding: 88px 128px;
       transform: translateX(100%);
@@ -33,7 +33,7 @@
     .slide.animated { transition: transform 0.58s cubic-bezier(0.77, 0, 0.175, 1); }
     .slide.center { align-items: center; text-align: center; }
     /* Dense layout for content-heavy slides */
-    .slide.dense { justify-content: flex-start; padding-top: 56px; padding-bottom: 48px; }
+    .slide.dense { justify-content: flex-start; padding-top: 52px; padding-bottom: 40px; }
 
     /* ── Fixed chrome ─────────────────────────────────────── */
     #logo {
@@ -663,7 +663,7 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <section class="slide dense" data-section="ETA vs. Go-Live">
     <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
-    <h2 style="font-size:44px;">How we handle<br>difficult &amp; medium cases.</h2>
+    <h2 style="font-size:44px;">How we handle it.</h2>
     <div class="handle-grid">
       <div class="handle-card">
         <div class="handle-num">01</div>
