@@ -35,6 +35,9 @@
     /* Dense layout for content-heavy slides */
     .slide.dense { justify-content: flex-start; padding-top: 40px; padding-bottom: 32px; }
     .slide.dense .eyebrow { margin-bottom: 16px; }
+    /* Tall layout — full vertical breathing room */
+    .slide.tall { justify-content: flex-start; padding-top: 64px; padding-bottom: 48px; }
+    .slide.tall .eyebrow { margin-bottom: 22px; }
 
     /* ── Fixed chrome ─────────────────────────────────────── */
     #logo {
@@ -183,6 +186,17 @@
     .badge.manu { background: rgba(255,255,255,0.04); color: #555; border: 1px solid rgba(255,255,255,0.1); }
     .badge.manu::before { background: #333; }
 
+    /* ── Two-column split (Setting ETAs) ─────────────────── */
+    .split-cols { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; margin-top: 32px; width: 100%; }
+    .split-divider { background: #1a1a1a; }
+    .split-col { padding: 0 40px; }
+    .split-col:first-child { padding-left: 0; }
+    .split-col:last-child { padding-right: 0; }
+    .split-col-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px; }
+    .split-col-label.auto { color: #0055FF; }
+    .split-col-label.manu { color: #555; }
+    .split-col .pt-text { font-size: 18px; }
+
     /* ── Screenshot wrapper ───────────────────────────────── */
     .img-wrap {
       border-radius: 14px; overflow: hidden;
@@ -201,17 +215,17 @@
     .metric-def strong { color: #ccc; font-weight: 600; }
 
     /* ── Go-live spectrum ─────────────────────────────────── */
-    .gl-table { display: flex; flex-direction: column; gap: 0; margin-top: 16px; width: 100%; }
+    .gl-table { display: flex; flex-direction: column; gap: 0; margin-top: 20px; width: 100%; }
     .gl-row {
-      display: grid; grid-template-columns: 240px 1fr 90px;
+      display: grid; grid-template-columns: 260px 1fr 90px;
       gap: 24px; align-items: center;
-      padding: 10px 0;
+      padding: 16px 0;
       border-bottom: 1px solid #161616;
     }
     .gl-row:last-child { border-bottom: none; }
-    .gl-case  { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px; }
-    .gl-desc  { font-size: 11px; color: #666; line-height: 1.4; }
-    .gl-bar-wrap { position: relative; height: 20px; display: flex; align-items: center; }
+    .gl-case  { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .gl-desc  { font-size: 13px; color: #666; line-height: 1.4; }
+    .gl-bar-wrap { position: relative; height: 24px; display: flex; align-items: center; }
     .gl-axis  { position: absolute; left: 0; right: 0; height: 1px; background: #222; }
     .gl-range {
       position: absolute; height: 8px; border-radius: 4px;
@@ -222,7 +236,7 @@
     .gl-range.medium { width: 54%; left: 23%; background: #CC7700; }
     .gl-range.hard   { width: 80%; left: 10%; background: #CC3300; }
     .gl-pct-num {
-      font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+      font-size: 28px; font-weight: 800; letter-spacing: -0.5px;
       text-align: right; display: block;
     }
     .gl-pct-num.ideal  { color: #0055FF; }
@@ -230,67 +244,67 @@
     .gl-pct-num.medium { color: #CC7700; }
     .gl-pct-num.hard   { color: #CC3300; }
     .gl-legend {
-      display: flex; gap: 32px; margin-top: 14px;
-      font-size: 11px; color: #555; font-weight: 500; letter-spacing: 0.08em;
+      display: flex; gap: 32px; margin-top: 18px;
+      font-size: 12px; color: #555; font-weight: 500; letter-spacing: 0.08em;
     }
     .gl-legend span { display: flex; align-items: center; gap: 6px; }
     .gl-legend span::before { content:''; width:8px; height:2px; border-radius:1px; background: currentColor; display:block; }
 
     /* ── Go-live handling cards ───────────────────────────── */
-    .handle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .handle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
     .handle-card {
       background: rgba(255,255,255,0.025);
-      border: 1px solid #1a1a1a; border-radius: 14px;
-      padding: 16px 20px 18px;
+      border: 1px solid #1a1a1a; border-radius: 16px;
+      padding: 24px 28px 28px;
     }
-    .handle-num  { font-size: 10px; font-weight: 700; color: #0055FF; margin-bottom: 6px; letter-spacing: 0.1em; }
-    .handle-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; line-height: 1.25; }
-    .handle-desc  { font-size: 12px; color: #888; line-height: 1.45; }
+    .handle-num  { font-size: 11px; font-weight: 700; color: #0055FF; margin-bottom: 8px; letter-spacing: 0.1em; }
+    .handle-title { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 8px; line-height: 1.25; }
+    .handle-desc  { font-size: 15px; color: #888; line-height: 1.5; }
 
     /* ── Factor table (slide: what drives accuracy) ─────────── */
-    .factor-table { display: flex; flex-direction: column; margin-top: 10px; width: 100%; }
+    .factor-table { display: flex; flex-direction: column; margin-top: 16px; width: 100%; }
     .factor-group-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-      color: #333; padding: 6px 0 2px; border-top: 1px solid #1a1a1a; margin-top: 0;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #666; padding: 10px 0 4px; border-top: 1px solid #1a1a1a; margin-top: 0;
     }
-    .factor-group-label:first-child { border-top: none; }
+    .factor-group-label:first-child { border-top: none; padding-top: 0; }
     .factor-row {
-      display: grid; grid-template-columns: 28px 1fr 20px 1fr;
-      gap: 10px; align-items: center; padding: 5px 0;
+      display: grid; grid-template-columns: 32px 1fr 20px 1fr;
+      gap: 12px; align-items: center; padding: 11px 0;
       border-bottom: 1px solid #141414;
     }
     .factor-row:last-child { border-bottom: none; }
-    .factor-num  { font-size: 10px; font-weight: 700; color: #0055FF; }
-    .factor-name { font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3; }
-    .factor-arr  { font-size: 12px; color: #333; text-align: center; }
-    .factor-impact { font-size: 13px; color: #999; line-height: 1.35; }
+    .factor-num  { font-size: 11px; font-weight: 700; color: #0055FF; }
+    .factor-name { font-size: 16px; font-weight: 600; color: #fff; line-height: 1.3; }
+    .factor-arr  { font-size: 13px; color: #444; text-align: center; }
+    .factor-impact { font-size: 15px; color: #999; line-height: 1.35; }
 
     /* ── OEM rating table ───────────────────────────────────── */
-    .oem-table { display: flex; flex-direction: column; margin-top: 14px; width: 100%; }
+    .oem-table { display: flex; flex-direction: column; margin-top: 20px; width: 100%; }
     .oem-header {
-      display: grid; grid-template-columns: 1fr repeat(3, 90px);
-      gap: 8px; padding-bottom: 8px; border-bottom: 1px solid #1e1e1e;
+      display: grid; grid-template-columns: 1fr repeat(3, 110px);
+      gap: 8px; padding-bottom: 12px; border-bottom: 1px solid #1e1e1e;
     }
     .oem-col-head {
-      font-size: 11px; font-weight: 700; color: #aaa; text-align: center;
+      font-size: 13px; font-weight: 700; color: #aaa; text-align: center;
       letter-spacing: 0.05em;
     }
     .oem-row {
-      display: grid; grid-template-columns: 1fr repeat(3, 90px);
-      gap: 8px; align-items: center; padding: 6px 0;
+      display: grid; grid-template-columns: 1fr repeat(3, 110px);
+      gap: 8px; align-items: center; padding: 11px 0;
       border-bottom: 1px solid #141414;
     }
     .oem-row:last-child { border-bottom: none; }
-    .oem-factor { font-size: 11px; color: #777; line-height: 1.25; }
-    .oem-factor strong { color: #ccc; font-weight: 600; display: block; font-size: 12px; }
+    .oem-factor { font-size: 13px; color: #777; line-height: 1.25; }
+    .oem-factor strong { color: #ccc; font-weight: 600; display: block; font-size: 14px; }
     .oem-cell { display: flex; justify-content: center; }
     .rpill {
-      display: inline-flex; align-items: center; gap: 4px;
-      padding: 3px 10px; border-radius: 100px;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 14px; border-radius: 100px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
       white-space: nowrap;
     }
-    .rpill::before { content:''; width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+    .rpill::before { content:''; width:6px; height:6px; border-radius:50%; flex-shrink:0; }
     .rpill.high   { background: rgba(0,85,255,0.12); color: #5588FF; border: 1px solid rgba(0,85,255,0.25); }
     .rpill.high::before   { background: #0055FF; }
     .rpill.medium { background: rgba(180,120,0,0.12); color: #CC9900; border: 1px solid rgba(180,120,0,0.28); }
@@ -298,7 +312,7 @@
     .rpill.low    { background: rgba(200,60,0,0.1);  color: #CC4400; border: 1px solid rgba(200,60,0,0.22); }
     .rpill.low::before    { background: #CC4400; }
     .rpill.asterisk { position: relative; }
-    .oem-footnote { font-size: 10px; color: #333; margin-top: 10px; font-style: italic; }
+    .oem-footnote { font-size: 11px; color: #444; margin-top: 14px; font-style: italic; }
 
     /* ── Q&A ──────────────────────────────────────────────── */
     .qa-q { font-size: 100px; font-weight: 800; letter-spacing: -4px; line-height: 1; }
@@ -555,29 +569,58 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 9 — SETTING ETAs: BEST CASE
+       SLIDE 9 — SETTING ETAs: BEST CASE + HARD CASE (merged)
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <section class="slide" data-section="Setting ETAs">
     <div class="eyebrow">03 &mdash; Setting ETAs</div>
-    <h2>Best case: automatic<br>&amp; data-driven.</h2>
-    <div class="badge-row">
-      <span class="badge auto">BMW</span>
-      <span class="badge auto">Seat</span>
-      <span class="badge auto">Cupra</span>
-      <span class="badge auto">Stellantis</span>
-    </div>
-    <div class="points" style="margin-top:30px;">
-      <div class="point">
-        <div class="pt"></div>
-        <div class="pt-text"><strong>Automatic readout</strong> of live production status directly from OEM systems</div>
+    <h2>Two approaches.<br>Very different visibility.</h2>
+    <div class="split-cols">
+      <div class="split-col">
+        <div class="split-col-label auto">Automated &amp; data-driven</div>
+        <div class="badge-row" style="margin-top:0;">
+          <span class="badge auto">BMW</span>
+          <span class="badge auto">Seat</span>
+          <span class="badge auto">Cupra</span>
+          <span class="badge auto">Stellantis</span>
+        </div>
+        <div class="points" style="margin-top:22px; gap:14px;">
+          <div class="point">
+            <div class="pt"></div>
+            <div class="pt-text"><strong>Automatic readout</strong> of live production status</div>
+          </div>
+          <div class="point">
+            <div class="pt"></div>
+            <div class="pt-text"><strong>Model-based predictions</strong> via status, location &amp; transport time</div>
+          </div>
+          <div class="point">
+            <div class="pt"></div>
+            <div class="pt-text"><strong>Continuous updates</strong> as the vehicle moves</div>
+          </div>
+        </div>
       </div>
-      <div class="point">
-        <div class="pt"></div>
-        <div class="pt-text"><strong>Model-based predictions</strong> using vehicle status, plant location &amp; transport time</div>
-      </div>
-      <div class="point">
-        <div class="pt"></div>
-        <div class="pt-text"><strong>Continuous updates</strong> as the vehicle moves: ordered &rarr; produced &rarr; in transit &rarr; arrived</div>
+      <div class="split-divider"></div>
+      <div class="split-col">
+        <div class="split-col-label manu">Manual. Higher uncertainty.</div>
+        <div class="badge-row" style="margin-top:0;">
+          <span class="badge manu">MG</span>
+          <span class="badge manu">BYD</span>
+          <span class="badge manu">Hyundai</span>
+          <span class="badge manu">Kia</span>
+        </div>
+        <div class="points" style="margin-top:22px; gap:14px;">
+          <div class="point">
+            <div class="pt"></div>
+            <div class="pt-text"><strong>No automated data feed</strong> from OEM</div>
+          </div>
+          <div class="point">
+            <div class="pt"></div>
+            <div class="pt-text"><strong>Manual process</strong> &mdash; direct OEM &amp; compound calls</div>
+          </div>
+          <div class="point">
+            <div class="pt"></div>
+            <div class="pt-text"><strong>Higher uncertainty</strong> &mdash; wider deviation or cars offline</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -597,36 +640,7 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 11 — SETTING ETAs: HARD CASES
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide" data-section="Setting ETAs">
-    <div class="eyebrow">03 &mdash; Setting ETAs</div>
-    <h2>Harder cases: low visibility,<br>manual work.</h2>
-    <div class="badge-row">
-      <span class="badge manu">MG</span>
-      <span class="badge manu">BYD</span>
-      <span class="badge manu">Hyundai</span>
-      <span class="badge manu">Kia</span>
-    </div>
-    <div class="points" style="margin-top:30px;">
-      <div class="point">
-        <div class="pt"></div>
-        <div class="pt-text"><strong>No automated data feed</strong> &mdash; no live production or transport status from OEM</div>
-      </div>
-      <div class="point">
-        <div class="pt"></div>
-        <div class="pt-text"><strong>Manual process</strong> &mdash; requires direct calls with OEMs and compounds</div>
-      </div>
-      <div class="point">
-        <div class="pt"></div>
-        <div class="pt-text"><strong>Higher uncertainty</strong> &mdash; reflected in wider deviation weeks or cars being offline</div>
-      </div>
-    </div>
-    <p class="subtitle" style="margin-top:32px; font-size:16px;">Ongoing OEM relationship management is critical to maintaining accuracy here.</p>
-  </section>
-
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 12 — ACCURACY DASHBOARD
+       SLIDE 11 — ACCURACY DASHBOARD
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <section class="slide" data-section="Steering">
     <div class="eyebrow">04 &mdash; Steering</div>
@@ -639,16 +653,126 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 13 — ETA VS. WEBSITE GO-LIVE (visual)
+       SLIDE 13 (new order) — FACTORS DRIVING AVAILABILITY & ETA ACCURACY
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide dense" data-section="ETA vs. Go-Live">
+  <section class="slide tall" data-section="ETA vs. Go-Live">
     <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
-    <h2 style="font-size:38px; margin-bottom:6px;">No ETA, no go-live.</h2>
-    <p style="font-size:13px; color:#555; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; margin-bottom:0;">Data quality determines how many cars go online — and how precise the prediction can be.</p>
+    <h2 style="font-size:46px; letter-spacing:-1.5px;">What drives availability<br>&amp; ETA accuracy.</h2>
+
+    <div class="factor-table">
+      <!-- Group 1: OEM Adherence -->
+      <div class="factor-group-label">OEM Adherence</div>
+      <div class="factor-row">
+        <div class="factor-num">1.1</div>
+        <div class="factor-name">OEM adherence to delivery timing</div>
+        <div class="factor-arr">&rarr;</div>
+        <div class="factor-impact">High reliability of delivery plan</div>
+      </div>
+      <div class="factor-row">
+        <div class="factor-num">1.2</div>
+        <div class="factor-name">OEM adherence to config selection</div>
+        <div class="factor-arr">&rarr;</div>
+        <div class="factor-impact">High reliability of delivery plan</div>
+      </div>
+
+      <!-- Group 2: Data Timeliness -->
+      <div class="factor-group-label">Data Timeliness</div>
+      <div class="factor-row">
+        <div class="factor-num">2.1</div>
+        <div class="factor-name">Regular production &amp; transportation updates</div>
+        <div class="factor-arr">&rarr;</div>
+        <div class="factor-impact">Transparency and planability</div>
+      </div>
+      <div class="factor-row">
+        <div class="factor-num">2.2</div>
+        <div class="factor-name">Long time-horizons of updates (3m+)</div>
+        <div class="factor-arr">&rarr;</div>
+        <div class="factor-impact">Transparency and planability</div>
+      </div>
+
+      <!-- Group 3: Operational Flexibility -->
+      <div class="factor-group-label">Operational Flexibility</div>
+      <div class="factor-row">
+        <div class="factor-num">3</div>
+        <div class="factor-name">Flexible call-off terms</div>
+        <div class="factor-arr">&rarr;</div>
+        <div class="factor-impact">Possibility to buffer volatility</div>
+      </div>
+      <div class="factor-row">
+        <div class="factor-num">4</div>
+        <div class="factor-name">Low config variety</div>
+        <div class="factor-arr">&rarr;</div>
+        <div class="factor-impact">More switching options</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 14 (new order) — OEM RATING TABLE
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide tall" data-section="ETA vs. Go-Live">
+    <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
+    <h2 style="font-size:46px; letter-spacing:-1.5px;">How OEMs compare.</h2>
+
+    <div class="oem-table">
+      <div class="oem-header">
+        <div></div>
+        <div class="oem-col-head">BMW</div>
+        <div class="oem-col-head">Hyundai</div>
+        <div class="oem-col-head">Stellantis</div>
+      </div>
+
+      <div class="oem-row">
+        <div class="oem-factor"><strong>1.1</strong> Delivery timing</div>
+        <div class="oem-cell"><span class="rpill high">High</span></div>
+        <div class="oem-cell"><span class="rpill high">High</span></div>
+        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+      </div>
+      <div class="oem-row">
+        <div class="oem-factor"><strong>1.2</strong> Config selection</div>
+        <div class="oem-cell"><span class="rpill high">High</span></div>
+        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+        <div class="oem-cell"><span class="rpill high">High</span></div>
+      </div>
+      <div class="oem-row">
+        <div class="oem-factor"><strong>2.1</strong> Production &amp; transport updates</div>
+        <div class="oem-cell"><span class="rpill high">High</span></div>
+        <div class="oem-cell"><span class="rpill low">Low</span></div>
+        <div class="oem-cell"><span class="rpill high asterisk">High *</span></div>
+      </div>
+      <div class="oem-row">
+        <div class="oem-factor"><strong>2.2</strong> Update horizons (3m+)</div>
+        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+        <div class="oem-cell"><span class="rpill low">Low</span></div>
+        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+      </div>
+      <div class="oem-row">
+        <div class="oem-factor"><strong>3</strong> Flexible call-off terms</div>
+        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+        <div class="oem-cell"><span class="rpill high">High</span></div>
+        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+      </div>
+      <div class="oem-row">
+        <div class="oem-factor"><strong>4</strong> Low config variety</div>
+        <div class="oem-cell"><span class="rpill low">Low</span></div>
+        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+      </div>
+    </div>
+    <p class="oem-footnote">* Only since March</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 15 (new order) — ETA VS. WEBSITE GO-LIVE (visual)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide tall" data-section="ETA vs. Go-Live">
+    <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
+    <h2 style="font-size:48px; margin-bottom:8px;">No ETA, no go-live.</h2>
+    <p style="font-size:14px; color:#555; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; margin-bottom:0;">Data quality determines how many cars go online — and how precise the prediction can be.</p>
 
     <div class="gl-table">
       <!-- Header row -->
-      <div style="display:grid; grid-template-columns:260px 1fr 90px; gap:28px; padding-bottom:10px; border-bottom:1px solid #1a1a1a;">
+      <div style="display:grid; grid-template-columns:280px 1fr 100px; gap:28px; padding-bottom:12px; border-bottom:1px solid #1a1a1a; margin-top:4px;">
         <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Case</div>
         <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Deviation range</div>
         <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; text-align:right;">% Online</div>
@@ -714,11 +838,11 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 14 — ETA VS. GO-LIVE: HOW WE HANDLE IT
+       SLIDE 16 (new order) — ETA VS. GO-LIVE: HOW WE HANDLE IT
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide dense" data-section="ETA vs. Go-Live">
+  <section class="slide tall" data-section="ETA vs. Go-Live">
     <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
-    <h2 style="font-size:38px;">How we handle it.</h2>
+    <h2 style="font-size:48px;">How we handle it.</h2>
     <div class="handle-grid">
       <div class="handle-card">
         <div class="handle-num">01</div>
@@ -741,116 +865,6 @@
         <div class="handle-desc">ETAs reviewed and updated continuously — not set-and-forget. Every shift tracked against targets.</div>
       </div>
     </div>
-  </section>
-
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 15 — FACTORS DRIVING AVAILABILITY & ETA ACCURACY
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide dense" data-section="ETA vs. Go-Live">
-    <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
-    <h2 style="font-size:32px; letter-spacing:-1px;">What drives availability &amp; ETA accuracy.</h2>
-
-    <div class="factor-table">
-      <!-- Group 1: OEM Adherence -->
-      <div class="factor-group-label">OEM Adherence</div>
-      <div class="factor-row">
-        <div class="factor-num">1.1</div>
-        <div class="factor-name">OEM adherence to delivery timing</div>
-        <div class="factor-arr">→</div>
-        <div class="factor-impact">High reliability of delivery plan</div>
-      </div>
-      <div class="factor-row">
-        <div class="factor-num">1.2</div>
-        <div class="factor-name">OEM adherence to config selection</div>
-        <div class="factor-arr">→</div>
-        <div class="factor-impact">Transparency and planability</div>
-      </div>
-
-      <!-- Group 2: Data Timeliness -->
-      <div class="factor-group-label">Data Timeliness</div>
-      <div class="factor-row">
-        <div class="factor-num">2.1</div>
-        <div class="factor-name">Regular production &amp; transportation updates</div>
-        <div class="factor-arr">→</div>
-        <div class="factor-impact">Possibility to buffer volatility</div>
-      </div>
-      <div class="factor-row">
-        <div class="factor-num">2.2</div>
-        <div class="factor-name">Long time-horizons of updates (3m+)</div>
-        <div class="factor-arr">→</div>
-        <div class="factor-impact">More switching options</div>
-      </div>
-
-      <!-- Group 3: Operational Flexibility -->
-      <div class="factor-group-label">Operational Flexibility</div>
-      <div class="factor-row">
-        <div class="factor-num">3</div>
-        <div class="factor-name">Flexible call-off terms</div>
-        <div class="factor-arr"></div>
-        <div class="factor-impact"></div>
-      </div>
-      <div class="factor-row">
-        <div class="factor-num">4</div>
-        <div class="factor-name">Low config variety</div>
-        <div class="factor-arr"></div>
-        <div class="factor-impact"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 16 — OEM RATING TABLE
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide dense" data-section="ETA vs. Go-Live">
-    <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
-    <h2 style="font-size:32px; letter-spacing:-1px;">How OEMs compare.</h2>
-
-    <div class="oem-table">
-      <div class="oem-header">
-        <div></div>
-        <div class="oem-col-head">BMW</div>
-        <div class="oem-col-head">Hyundai</div>
-        <div class="oem-col-head">Stellantis</div>
-      </div>
-
-      <div class="oem-row">
-        <div class="oem-factor"><strong>1.1</strong> Delivery timing</div>
-        <div class="oem-cell"><span class="rpill high">High</span></div>
-        <div class="oem-cell"><span class="rpill high">High</span></div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
-      </div>
-      <div class="oem-row">
-        <div class="oem-factor"><strong>1.2</strong> Config selection</div>
-        <div class="oem-cell"><span class="rpill high">High</span></div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
-        <div class="oem-cell"><span class="rpill high">High</span></div>
-      </div>
-      <div class="oem-row">
-        <div class="oem-factor"><strong>2.1</strong> Production &amp; transport updates</div>
-        <div class="oem-cell"><span class="rpill high">High</span></div>
-        <div class="oem-cell"><span class="rpill low">Low</span></div>
-        <div class="oem-cell"><span class="rpill high asterisk">High *</span></div>
-      </div>
-      <div class="oem-row">
-        <div class="oem-factor"><strong>2.2</strong> Update horizons (3m+)</div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
-        <div class="oem-cell"><span class="rpill low">Low</span></div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
-      </div>
-      <div class="oem-row">
-        <div class="oem-factor"><strong>3</strong> Flexible call-off terms</div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
-        <div class="oem-cell"><span class="rpill high">High</span></div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
-      </div>
-      <div class="oem-row">
-        <div class="oem-factor"><strong>4</strong> Low config variety</div>
-        <div class="oem-cell"><span class="rpill low">Low</span></div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
-      </div>
-    </div>
-    <p class="oem-footnote">* Only since March</p>
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
