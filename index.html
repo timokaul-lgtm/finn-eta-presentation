@@ -304,7 +304,8 @@
   <h2>ETAs at FINN</h2>
   <p>Enter password to continue</p>
   <div id="gate-form">
-    <input id="gate-input" type="password" placeholder="Password" autocomplete="off" />
+    <input id="gate-input" type="password" placeholder="Password"
+           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
     <div id="gate-error">Incorrect password — try again</div>
     <button id="gate-btn">Continue &rarr;</button>
   </div>
@@ -713,7 +714,7 @@
   }
 
   function tryPass() {
-    if (inp.value === PASS) {
+    if (inp.value.trim() === PASS) {
       sessionStorage.setItem('eta-auth', '1');
       gate.style.transition = 'opacity 0.4s';
       gate.style.opacity = '0';
