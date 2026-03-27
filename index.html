@@ -314,6 +314,14 @@
     .rpill.asterisk { position: relative; }
     .oem-footnote { font-size: 11px; color: #444; margin-top: 14px; font-style: italic; }
 
+    /* ── Illustrative sticker ─────────────────────────────── */
+    .sticker {
+      position: absolute; top: 60px; right: 128px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #444; border: 1px solid #242424; border-radius: 100px;
+      padding: 5px 13px;
+    }
+
     /* ── Q&A ──────────────────────────────────────────────── */
     .qa-q { font-size: 100px; font-weight: 800; letter-spacing: -4px; line-height: 1; }
     .qa-sub { font-size: 20px; color: #444; margin-top: 24px; }
@@ -616,8 +624,8 @@
       <div class="factor-row">
         <div class="factor-num">1.2</div>
         <div class="factor-name">OEM adherence to config selection</div>
-        <div class="factor-arr">&rarr;</div>
-        <div class="factor-impact">High reliability of delivery plan</div>
+        <div class="factor-arr"></div>
+        <div class="factor-impact"></div>
       </div>
 
       <!-- Group 2: Data Timeliness -->
@@ -631,8 +639,8 @@
       <div class="factor-row">
         <div class="factor-num">2.2</div>
         <div class="factor-name">Long time-horizons of updates (3m+)</div>
-        <div class="factor-arr">&rarr;</div>
-        <div class="factor-impact">Transparency and planability</div>
+        <div class="factor-arr"></div>
+        <div class="factor-impact"></div>
       </div>
 
       <!-- Group 3: Operational Flexibility -->
@@ -653,7 +661,82 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 14 (new order) — OEM RATING TABLE
+       SLIDE 13 (swapped) — ETA VS. WEBSITE GO-LIVE (visual)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide tall" data-section="ETA vs. Go-Live">
+    <div class="sticker">Illustrative</div>
+    <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
+    <h2 style="font-size:48px; margin-bottom:8px;">No ETA, no go-live.</h2>
+
+    <div class="gl-table">
+      <!-- Header row -->
+      <div style="display:grid; grid-template-columns:280px 1fr 100px; gap:28px; padding-bottom:12px; border-bottom:1px solid #1a1a1a; margin-top:4px;">
+        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Case</div>
+        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Deviation range</div>
+        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; text-align:right;">% Online</div>
+      </div>
+
+      <!-- Ideal -->
+      <div class="gl-row">
+        <div>
+          <div class="gl-case">Ideal</div>
+          <div class="gl-desc">High reliability · daily/weekly updates · long planning horizon</div>
+        </div>
+        <div class="gl-bar-wrap">
+          <div class="gl-axis"></div>
+          <div class="gl-range ideal"></div>
+        </div>
+        <div><span class="gl-pct-num ideal">100%</span></div>
+      </div>
+
+      <!-- Very Good -->
+      <div class="gl-row">
+        <div>
+          <div class="gl-case">(Very) Good</div>
+          <div class="gl-desc">High reliability · regular updates · solid planning horizon</div>
+        </div>
+        <div class="gl-bar-wrap">
+          <div class="gl-axis"></div>
+          <div class="gl-range good"></div>
+        </div>
+        <div><span class="gl-pct-num good">~70%</span></div>
+      </div>
+
+      <!-- Medium -->
+      <div class="gl-row">
+        <div>
+          <div class="gl-case">Medium</div>
+          <div class="gl-desc">Medium reliability · medium data availability · solid planning horizon</div>
+        </div>
+        <div class="gl-bar-wrap">
+          <div class="gl-axis"></div>
+          <div class="gl-range medium"></div>
+        </div>
+        <div><span class="gl-pct-num medium">~40%</span></div>
+      </div>
+
+      <!-- Difficult -->
+      <div class="gl-row">
+        <div>
+          <div class="gl-case">Difficult</div>
+          <div class="gl-desc">Volatile delivery · no/low data availability · short planning horizon</div>
+        </div>
+        <div class="gl-bar-wrap">
+          <div class="gl-axis"></div>
+          <div class="gl-range hard"></div>
+        </div>
+        <div><span class="gl-pct-num hard">&lt;20%</span></div>
+      </div>
+    </div>
+
+    <div class="gl-legend">
+      <span style="color:#0055FF;">Narrow deviation &rarr; high confidence</span>
+      <span style="color:#CC3300;">Wide deviation &rarr; cars go offline or stay offline</span>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 14 (swapped) — OEM RATING TABLE
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <section class="slide tall" data-section="ETA vs. Go-Live">
     <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
@@ -671,7 +754,7 @@
         <div class="oem-factor"><strong>1.1</strong> Delivery timing</div>
         <div class="oem-cell"><span class="rpill high">High</span></div>
         <div class="oem-cell"><span class="rpill high">High</span></div>
-        <div class="oem-cell"><span class="rpill medium">Medium</span></div>
+        <div class="oem-cell"><span class="rpill low">Low</span></div>
       </div>
       <div class="oem-row">
         <div class="oem-factor"><strong>1.2</strong> Config selection</div>
@@ -683,7 +766,7 @@
         <div class="oem-factor"><strong>2.1</strong> Production &amp; transport updates</div>
         <div class="oem-cell"><span class="rpill high">High</span></div>
         <div class="oem-cell"><span class="rpill low">Low</span></div>
-        <div class="oem-cell"><span class="rpill high asterisk">High *</span></div>
+        <div class="oem-cell"><span class="rpill low">Low</span></div>
       </div>
       <div class="oem-row">
         <div class="oem-factor"><strong>2.2</strong> Update horizons (3m+)</div>
@@ -703,82 +786,6 @@
         <div class="oem-cell"><span class="rpill medium">Medium</span></div>
         <div class="oem-cell"><span class="rpill medium">Medium</span></div>
       </div>
-    </div>
-    <p class="oem-footnote">* Only since March</p>
-  </section>
-
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 15 (new order) — ETA VS. WEBSITE GO-LIVE (visual)
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide tall" data-section="ETA vs. Go-Live">
-    <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
-    <h2 style="font-size:48px; margin-bottom:8px;">No ETA, no go-live.</h2>
-    <p style="font-size:14px; color:#555; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; margin-bottom:0;">Data quality determines how many cars go online — and how precise the prediction can be.</p>
-
-    <div class="gl-table">
-      <!-- Header row -->
-      <div style="display:grid; grid-template-columns:280px 1fr 100px; gap:28px; padding-bottom:12px; border-bottom:1px solid #1a1a1a; margin-top:4px;">
-        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Case</div>
-        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Deviation range</div>
-        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; text-align:right;">% Online</div>
-      </div>
-
-      <!-- Ideal -->
-      <div class="gl-row">
-        <div>
-          <div class="gl-case">Ideal</div>
-          <div class="gl-desc">Production data on config level for full year available</div>
-        </div>
-        <div class="gl-bar-wrap">
-          <div class="gl-axis"></div>
-          <div class="gl-range ideal"></div>
-        </div>
-        <div><span class="gl-pct-num ideal">100%</span></div>
-      </div>
-
-      <!-- Very Good -->
-      <div class="gl-row">
-        <div>
-          <div class="gl-case">(Very) Good</div>
-          <div class="gl-desc">Production data for selected months or models</div>
-        </div>
-        <div class="gl-bar-wrap">
-          <div class="gl-axis"></div>
-          <div class="gl-range good"></div>
-        </div>
-        <div><span class="gl-pct-num good">~70%</span></div>
-      </div>
-
-      <!-- Medium -->
-      <div class="gl-row">
-        <div>
-          <div class="gl-case">Medium</div>
-          <div class="gl-desc">No production data — stable, reliable, repetitive delivery</div>
-        </div>
-        <div class="gl-bar-wrap">
-          <div class="gl-axis"></div>
-          <div class="gl-range medium"></div>
-        </div>
-        <div><span class="gl-pct-num medium">~40%</span></div>
-      </div>
-
-      <!-- Difficult -->
-      <div class="gl-row">
-        <div>
-          <div class="gl-case">Difficult</div>
-          <div class="gl-desc">No production data — volatile, unpredictable delivery</div>
-        </div>
-        <div class="gl-bar-wrap">
-          <div class="gl-axis"></div>
-          <div class="gl-range hard"></div>
-        </div>
-        <div><span class="gl-pct-num hard">&lt;20%</span></div>
-      </div>
-    </div>
-
-    <div class="gl-legend">
-      <span style="color:#0055FF;">Narrow deviation &rarr; high confidence</span>
-      <span style="color:#CC3300;">Wide deviation &rarr; cars go offline or stay offline</span>
     </div>
   </section>
 
