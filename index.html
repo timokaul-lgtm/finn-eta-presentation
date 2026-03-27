@@ -318,65 +318,10 @@
     .qa-q { font-size: 100px; font-weight: 800; letter-spacing: -4px; line-height: 1; }
     .qa-sub { font-size: 20px; color: #444; margin-top: 24px; }
 
-    /* ── Password gate ────────────────────────────────────── */
-    #gate {
-      position: fixed; inset: 0; z-index: 9999;
-      background: #0d0d0d;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-    }
-    #gate .gate-logo {
-      font-size: 16px; font-weight: 800; letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.9); margin-bottom: 56px;
-    }
-    #gate .gate-rule { width: 36px; height: 3px; background: #0055FF; border-radius: 2px; margin-bottom: 40px; }
-    #gate h2 { font-size: 32px; font-weight: 700; letter-spacing: -1px; color: #fff; margin-bottom: 12px; }
-    #gate p  { font-size: 15px; color: #666; margin-bottom: 40px; }
-    #gate-form { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-    #gate-input {
-      width: 320px; padding: 16px 20px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid #2a2a2a; border-radius: 12px;
-      color: #fff; font-size: 17px; font-family: inherit;
-      letter-spacing: 0.05em; text-align: center;
-      outline: none; transition: border-color 0.2s;
-    }
-    #gate-input::placeholder { color: #333; }
-    #gate-input:focus { border-color: #0055FF; }
-    #gate-input.shake { animation: shake 0.35s ease; border-color: #ff3b30; }
-    #gate-btn {
-      width: 320px; padding: 16px;
-      background: #0055FF; border: none; border-radius: 12px;
-      color: #fff; font-size: 15px; font-weight: 600;
-      font-family: inherit; letter-spacing: 0.04em;
-      cursor: pointer; transition: background 0.2s;
-    }
-    #gate-btn:hover { background: #0044dd; }
-    #gate-error { font-size: 13px; color: #ff3b30; height: 18px; transition: opacity 0.2s; opacity: 0; }
-    #gate-error.visible { opacity: 1; }
-    @keyframes shake {
-      0%,100% { transform: translateX(0); }
-      20%      { transform: translateX(-8px); }
-      60%      { transform: translateX(8px); }
-      80%      { transform: translateX(-4px); }
-    }
   </style>
 </head>
 <body>
 
-<!-- ── Password gate ──────────────────────────────────────── -->
-<div id="gate">
-  <div class="gate-logo">FINN</div>
-  <div class="gate-rule"></div>
-  <h2>ETAs at FINN</h2>
-  <p>Enter password to continue</p>
-  <div id="gate-form">
-    <input id="gate-input" type="password" placeholder="Password"
-           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    <div id="gate-error">Incorrect password — try again</div>
-    <button id="gate-btn">Continue &rarr;</button>
-  </div>
-</div>
 
 <div id="logo">FINN</div>
 <div id="section-tag"></div>
@@ -879,34 +824,6 @@
 </div><!-- #deck -->
 
 <script>
-  /* ── Password gate ───────────────────────────────────── */
-  const PASS = 'FINN ETA CLM';
-  const gate  = document.getElementById('gate');
-  const inp   = document.getElementById('gate-input');
-  const err   = document.getElementById('gate-error');
-  const btn   = document.getElementById('gate-btn');
-
-  if (sessionStorage.getItem('eta-auth') === '1') {
-    gate.style.display = 'none';
-  }
-
-  function tryPass() {
-    if (inp.value.trim() === PASS) {
-      sessionStorage.setItem('eta-auth', '1');
-      gate.style.transition = 'opacity 0.4s';
-      gate.style.opacity = '0';
-      setTimeout(() => gate.remove(), 420);
-    } else {
-      err.classList.add('visible');
-      inp.classList.add('shake');
-      inp.value = '';
-      setTimeout(() => { inp.classList.remove('shake'); err.classList.remove('visible'); }, 1200);
-    }
-  }
-
-  btn.addEventListener('click', tryPass);
-  inp.addEventListener('keydown', e => { if (e.key === 'Enter') tryPass(); });
-
   /* ── Slide engine ────────────────────────────────────── */
   const slides    = Array.from(document.querySelectorAll('.slide'));
   const total     = slides.length;
