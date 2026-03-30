@@ -478,6 +478,70 @@
     .oem-col-head.stellantis { color: #CC9900; border-bottom: 2px solid rgba(204,153,0,0.4); padding-bottom: 6px; }
     .oem-cell.stellantis { background: rgba(204,153,0,0.03); }
 
+    /* ── Go-live rule slide ──────────────────────────────── */
+    .glr-live {
+      display: flex; align-items: center; gap: 28px;
+      margin-top: 32px;
+      background: rgba(0,170,60,0.07);
+      border: 1px solid rgba(0,170,60,0.2);
+      border-left: 4px solid #00AA44;
+      border-radius: 16px; padding: 28px 32px;
+    }
+    .glr-live-left { flex-shrink: 0; }
+    .glr-check {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(0,170,60,0.15); border: 2px solid rgba(0,170,60,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: #00CC55; line-height: 1;
+    }
+    .glr-live-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: #00AA44; margin-bottom: 10px;
+    }
+    .glr-live-rule {
+      font-size: 22px; font-weight: 500; color: #ccc; line-height: 1.4;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .glr-weeks {
+      font-size: 26px; font-weight: 800; color: #00CC55;
+      letter-spacing: -0.5px;
+    }
+    .glr-weeks-dim { color: #555; font-size: 18px; }
+
+    .glr-offline {
+      margin-top: 24px;
+      background: rgba(200,60,0,0.05);
+      border: 1px solid rgba(200,60,0,0.15);
+      border-left: 4px solid #993300;
+      border-radius: 16px; padding: 22px 32px;
+    }
+    .glr-offline-head {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: #993300; margin-bottom: 16px;
+    }
+    .glr-x-icon {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(200,60,0,0.15); border: 1px solid rgba(200,60,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: #CC4400; flex-shrink: 0;
+    }
+    .glr-offline-items { display: flex; flex-direction: column; gap: 12px; }
+    .glr-offline-item  { display: flex; gap: 12px; align-items: flex-start; }
+    .glr-offline-dot   {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #663300; flex-shrink: 0; margin-top: 8px;
+    }
+    .glr-offline-text  { font-size: 17px; color: #777; line-height: 1.45; }
+    .glr-offline-text strong { color: #bbb; font-weight: 600; }
+
+    .glr-note {
+      margin-top: 24px; padding: 14px 20px;
+      border: 1px solid #1e1e1e; border-radius: 10px;
+      font-size: 14px; color: #555; line-height: 1.6; font-style: italic;
+    }
+    .glr-note strong { color: #777; font-style: normal; }
+
     /* ── Target Picture (new) ────────────────────────────── */
     .tp-cols {
       display: grid; grid-template-columns: 1fr 1px 1.4fr;
@@ -833,62 +897,55 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 10 — ETA VS. GO-LIVE (confidence spectrum, visual)
+       SLIDE 10 — GO-LIVE LOGIC
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide tall" data-section="ETA vs. Go-Live" style="padding-top:56px; padding-bottom:48px;">
-    <div class="sticker">Illustrative</div>
+  <section class="slide" data-section="ETA vs. Go-Live">
     <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
-    <h2 style="margin-bottom:0;">No ETA, no go-live.</h2>
+    <h2>When a car goes live.</h2>
 
-    <div class="conf-layout">
-      <!-- Vertical confidence arrow — tip points UP toward confidence -->
-      <div class="conf-arrow-col">
-        <span class="conf-arrow-label top">Confidence</span>
-        <div class="conf-arrow-tip-up"></div>
-        <div class="conf-arrow-line"></div>
-        <span class="conf-arrow-label bot">Uncertainty</span>
+    <!-- GO LIVE card -->
+    <div class="glr-live">
+      <div class="glr-live-left">
+        <div class="glr-check">&#10003;</div>
       </div>
-
-      <!-- Table -->
-      <div class="conf-table-wrap" style="position:relative;">
-        <!-- Header -->
-        <div class="conf-row-head">
-          <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Situation</div>
-          <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Deviation range</div>
-          <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; text-align:right;">% Online</div>
-        </div>
-
-        <div class="conf-row">
-          <div class="gl-desc" style="font-size:14px;">High reliability &middot; daily/weekly updates &middot; long horizon</div>
-          <div class="gl-bar-wrap"><div class="gl-axis"></div><div class="gl-range ideal"></div></div>
-          <div><span class="gl-pct-num ideal" style="font-size:22px;">~100%</span></div>
-        </div>
-        <div class="conf-row">
-          <div class="gl-desc" style="font-size:14px;">High reliability &middot; regular updates &middot; solid horizon</div>
-          <div class="gl-bar-wrap"><div class="gl-axis"></div><div class="gl-range good"></div></div>
-          <div><span class="gl-pct-num good" style="font-size:22px;">~70%</span></div>
-        </div>
-        <div class="conf-row">
-          <div class="gl-desc" style="font-size:14px;">Medium reliability &middot; medium data availability</div>
-          <div class="gl-bar-wrap"><div class="gl-axis"></div><div class="gl-range medium"></div></div>
-          <div><span class="gl-pct-num medium" style="font-size:22px;">~40%</span></div>
-        </div>
-        <div class="conf-row">
-          <div class="gl-desc" style="font-size:14px;">Volatile delivery &middot; no/low data &middot; short horizon</div>
-          <div class="gl-bar-wrap"><div class="gl-axis"></div><div class="gl-range hard"></div></div>
-          <div><span class="gl-pct-num hard" style="font-size:22px;">&lt;20%</span></div>
-        </div>
-
-        <!-- Combinations callout — centred vertically between deviation and % online columns -->
-        <div class="conf-combo">
-          <div class="conf-combo-x">&times;</div>
-          <div class="conf-combo-text">
-            <strong>Various combinations possible</strong>
-            E.g. dependent on: FINN risk appetite, retention needs, assortment attractiveness
-          </div>
+      <div class="glr-live-body">
+        <div class="glr-live-tag">Goes live on website</div>
+        <div class="glr-live-rule">
+          Most likely ETA available &amp; deviation window
+          <span class="glr-weeks">&gt;0</span>
+          <span class="glr-weeks-dim">and</span>
+          <span class="glr-weeks">&le;10 weeks</span>
         </div>
       </div>
     </div>
+
+    <!-- STAYS OFFLINE section -->
+    <div class="glr-offline">
+      <div class="glr-offline-head">
+        <div class="glr-x-icon">&#10005;</div>
+        <span>Stays offline</span>
+      </div>
+      <div class="glr-offline-items">
+        <div class="glr-offline-item">
+          <div class="glr-offline-dot"></div>
+          <div class="glr-offline-text">High risk of <strong>significant config changes</strong></div>
+        </div>
+        <div class="glr-offline-item">
+          <div class="glr-offline-dot"></div>
+          <div class="glr-offline-text">High risk of <strong>config or model cancellations</strong></div>
+        </div>
+        <div class="glr-offline-item">
+          <div class="glr-offline-dot"></div>
+          <div class="glr-offline-text">Arrival timing <strong>cannot be reasonably predicted</strong> within a 10-week window</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom note -->
+    <div class="glr-note">
+      Decisions are made based on data as much as possible &mdash; however: it often requires <strong>business judgment</strong> due to missing data points or experience with the OEM.
+    </div>
+
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
