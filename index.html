@@ -373,6 +373,71 @@
     }
     .target-note strong { color: #888; }
 
+    /* ── Confidence arrow (slide 11) ────────────────────── */
+    .conf-layout { display: flex; gap: 24px; margin-top: 16px; flex: 1; min-height: 0; }
+    .conf-arrow-col {
+      display: flex; flex-direction: column; align-items: center;
+      width: 36px; flex-shrink: 0; padding-top: 2px; padding-bottom: 2px;
+    }
+    .conf-arrow-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      writing-mode: vertical-rl; text-orientation: mixed;
+    }
+    .conf-arrow-label.top { color: #0055FF; transform: rotate(180deg); margin-bottom: 8px; }
+    .conf-arrow-label.bot { color: #CC3300; transform: rotate(180deg); margin-top: 8px; }
+    .conf-arrow-line {
+      flex: 1; width: 4px; border-radius: 2px 2px 0 0;
+      background: linear-gradient(to bottom, #0055FF 0%, #0088CC 33%, #CC7700 66%, #CC3300 100%);
+    }
+    .conf-arrow-tip {
+      width: 0; height: 0;
+      border-left: 7px solid transparent; border-right: 7px solid transparent;
+      border-top: 12px solid #CC3300;
+    }
+    .conf-table-wrap { flex: 1; display: flex; flex-direction: column; }
+    .conf-row {
+      display: grid; grid-template-columns: 1fr 200px 90px;
+      gap: 24px; align-items: center; padding: 14px 0;
+      border-bottom: 1px solid #161616;
+    }
+    .conf-row:last-child { border-bottom: none; }
+    .conf-row-head {
+      display: grid; grid-template-columns: 1fr 200px 90px;
+      gap: 24px; padding-bottom: 10px; border-bottom: 1px solid #1a1a1a;
+    }
+
+    /* ── Management slide (slide 14) ────────────────────── */
+    .mgmt-section { padding: 14px 0; }
+    .mgmt-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .mgmt-badge {
+      display: inline-flex; padding: 3px 12px; border-radius: 100px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .mgmt-badge.limited { background: rgba(255,255,255,0.04); color: #444; border: 1px solid #2a2a2a; }
+    .mgmt-badge.inctrl  { background: rgba(0,85,255,0.12); color: #5588FF; border: 1px solid rgba(0,85,255,0.25); }
+    .mgmt-title { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .mgmt-title.dim  { color: #444; }
+    .mgmt-title.blue { color: #0055FF; }
+    .mgmt-inline-bullets { display: flex; gap: 20px; flex-wrap: wrap; }
+    .mgmt-inline-bullet { font-size: 13px; color: #444; display: flex; align-items: center; gap: 6px; }
+    .mgmt-inline-bullet::before { content:''; width:4px; height:4px; border-radius:50%; background:#333; flex-shrink:0; }
+    .mgmt-divider { height: 1px; background: #1c1c1c; margin: 6px 0; }
+    .mgmt-key {
+      background: rgba(0,85,255,0.07); border: 1px solid rgba(0,85,255,0.15);
+      border-left: 3px solid #0055FF; border-radius: 10px;
+      padding: 14px 18px; font-size: 16px; color: #aaa; line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .mgmt-key strong { color: #fff; }
+    .mgmt-how { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .mgmt-how-row { display: flex; gap: 12px; align-items: flex-start; }
+    .mgmt-how-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #0055FF; flex-shrink: 0; width: 28px; padding-top: 3px;
+    }
+    .mgmt-how-text { font-size: 14px; color: #777; line-height: 1.4; }
+
     /* ── Q&A ──────────────────────────────────────────────── */
     .qa-q { font-size: 100px; font-weight: 800; letter-spacing: -4px; line-height: 1; }
     .qa-sub { font-size: 20px; color: #444; margin-top: 24px; }
@@ -427,7 +492,39 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 3 — MISSION / DEVIATION CONCEPT
+       SLIDE 3 — HOW WE BUILT IT (moved from slide 5)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="slide" data-section="The Model">
+    <div class="eyebrow">02 &mdash; How We Built It</div>
+    <h2>Q4 2025:<br>Full reset.</h2>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-circle">1</div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-title">Analyzed all historic delivery data</div>
+          <div class="tl-sub">Patterns, accuracy gaps, and brand-level deviations from 2024 onward</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-circle">2</div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-title">Aligned directly with every OEM</div>
+          <div class="tl-sub">Updated production &amp; transport data, current lead times, model-specific logic</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-circle">3</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Reset &amp; relaunched logic for all brands</div>
+          <div class="tl-sub">Shifted from "Earliest ETA" to "Most Likely ETA" with symmetric deviation windows</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12px; color:#777; margin-top:8px; text-transform:uppercase; letter-spacing:0.16em; font-weight:600;">Data team &times; CLM</p>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SLIDE 4 — MISSION / DEVIATION CONCEPT
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <section class="slide" data-section="What is an ETA?">
     <div class="eyebrow">01 &mdash; Our Mission</div>
@@ -489,74 +586,33 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 5 — HOW WE BUILT IT
+       SLIDE 6 — ETA ACCURACY (merged with parameter example)
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide" data-section="The Model">
-    <div class="eyebrow">02 &mdash; How We Built It</div>
-    <h2>Q4 2025:<br>Full reset.</h2>
-    <div class="timeline">
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-circle">1</div><div class="tl-line"></div></div>
-        <div class="tl-body">
-          <div class="tl-title">Analyzed all historic delivery data</div>
-          <div class="tl-sub">Patterns, accuracy gaps, and brand-level deviations from 2024 onward</div>
-        </div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-circle">2</div><div class="tl-line"></div></div>
-        <div class="tl-body">
-          <div class="tl-title">Aligned directly with every OEM</div>
-          <div class="tl-sub">Updated production &amp; transport data, current lead times, model-specific logic</div>
-        </div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-circle">3</div></div>
-        <div class="tl-body">
-          <div class="tl-title">Reset &amp; relaunched logic for all brands</div>
-          <div class="tl-sub">Shifted from "Earliest ETA" to "Most Likely ETA" with symmetric deviation windows</div>
-        </div>
-      </div>
-    </div>
-    <p style="font-size:12px; color:#777; margin-top:8px; text-transform:uppercase; letter-spacing:0.16em; font-weight:600;">Data team &times; CLM</p>
-  </section>
-
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 6 — ETA ACCURACY (moved from slide 11)
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide" data-section="The Model">
+  <section class="slide dense" data-section="The Model">
     <div class="eyebrow">02 &mdash; Results</div>
-    <h2>ETA Accuracy:<br>how we measure it.</h2>
-    <div class="metric-def">
-      <strong>ETA Accuracy</strong> = % of ETA predictions<br>landing within the predicted range,<br>based on actual vehicle arrival.
+    <h2 style="font-size:42px;">ETA Accuracy:<br>how we measure it.</h2>
+    <div class="metric-def" style="margin-top:18px; font-size:16px;">
+      <strong>ETA Accuracy</strong> = % of ETA predictions landing within the predicted range, based on actual vehicle arrival.
     </div>
-    <div class="points" style="margin-top:36px;">
+    <div class="points" style="margin-top:20px; gap:12px;">
       <div class="point">
         <div class="pt"></div>
-        <div class="pt-text"><strong>Every prediction counts</strong> &mdash; not just the last one before delivery</div>
+        <div class="pt-text" style="font-size:18px;"><strong>Every prediction counts</strong> &mdash; not just the last one before delivery</div>
       </div>
       <div class="point">
         <div class="pt"></div>
-        <div class="pt-text"><strong>Continuous review</strong> &mdash; weekly adjustments, major updates monthly per brand</div>
+        <div class="pt-text" style="font-size:18px;"><strong>Continuous review</strong> &mdash; weekly adjustments, major updates monthly per brand</div>
       </div>
       <div class="point">
         <div class="pt"></div>
-        <div class="pt-text"><strong>Data-driven adjustments</strong> &mdash; Data team provides concrete suggestions from actuals</div>
+        <div class="pt-text" style="font-size:18px;"><strong>Data-driven adjustments</strong> &mdash; concrete parameter recommendations from actuals:</div>
       </div>
     </div>
-  </section>
-
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 7 — ETA PARAMETER OPTIMIZATION
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide" data-section="The Model">
-    <div class="eyebrow">02 &mdash; Results</div>
-    <h2>Data-driven<br>adjustments.</h2>
-    <div class="img-wrap" style="margin-top:28px; max-height:calc(100vh - 260px);">
-      <img src="IMG_2936.jpg"
-           alt="ETA Parameter Optimization table"
-           style="max-height:calc(100vh - 280px); width:auto; max-width:100%; margin:0 auto; display:block;" />
+    <div class="img-wrap" style="margin-top:14px;">
+      <img src="ETA-opt-bmw.png"
+           alt="ETA Parameter Optimization table — BMW example"
+           style="width:100%; height:auto; display:block;" />
     </div>
-    <p class="caption">ETA parameter optimization &mdash; recommendations based on last 3 months of actuals</p>
   </section>
 
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -565,10 +621,10 @@
   <section class="slide" data-section="Setting ETAs">
     <div class="eyebrow">03 &mdash; Setting ETAs</div>
     <h2>Two approaches.<br>Very different visibility.</h2>
-    <p style="font-size:12px; color:#444; margin-bottom:0; letter-spacing:0.08em;">OEMs shown are an exemplary selection</p>
+    <p style="font-size:12px; color:#444; margin-top:16px; margin-bottom:0; letter-spacing:0.08em;">OEMs shown are an exemplary selection</p>
     <div class="split-cols">
       <div class="split-col">
-        <div class="split-col-label auto">Automated &amp; data-driven</div>
+        <div class="split-col-label auto">Automated</div>
         <div class="badge-row" style="margin-top:0;">
           <span class="badge auto">BMW</span>
           <span class="badge auto">Seat</span>
@@ -592,7 +648,7 @@
       </div>
       <div class="split-divider"></div>
       <div class="split-col">
-        <div class="split-col-label manu">Manual. Higher uncertainty.</div>
+        <div class="split-col-label manu">Manual</div>
         <div class="badge-row" style="margin-top:0;">
           <span class="badge manu">MG</span>
           <span class="badge manu">BYD</span>
@@ -610,7 +666,7 @@
           </div>
           <div class="point">
             <div class="pt"></div>
-            <div class="pt-text"><strong>Higher uncertainty</strong> &mdash; wider deviation or cars offline</div>
+            <div class="pt-text"><strong>Weekly adjustments</strong> &mdash; manual review and ETA updates</div>
           </div>
         </div>
       </div>
@@ -643,13 +699,13 @@
       <div class="factor-group-label">OEM Adherence</div>
       <div class="factor-row">
         <div class="factor-num">1.1</div>
-        <div class="factor-name">OEM adherence to delivery timing</div>
+        <div class="factor-name">OEM delivery reliability</div>
         <div class="factor-arr">&rarr;</div>
         <div class="factor-impact">High reliability of delivery plan</div>
       </div>
       <div class="factor-row">
         <div class="factor-num">1.2</div>
-        <div class="factor-name">OEM adherence to config selection</div>
+        <div class="factor-name">OEM config reliability</div>
         <div class="factor-arr"></div>
         <div class="factor-impact"></div>
       </div>
@@ -687,78 +743,54 @@
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 13 — ETA VS. WEBSITE GO-LIVE (confidence spectrum)
+       SLIDE 11 — ETA VS. GO-LIVE (confidence spectrum, visual)
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide tall" data-section="ETA vs. Go-Live">
+  <section class="slide tall" data-section="ETA vs. Go-Live" style="padding-top:56px;">
     <div class="sticker">Illustrative</div>
     <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
-    <h2 style="font-size:48px; margin-bottom:6px;">No ETA, no go-live.</h2>
-    <p style="font-size:13px; color:#555; margin-bottom:0; font-style:italic;">Confidence in ETA decreases the further down you go. Deviation weeks and % online may vary independently.</p>
+    <h2 style="font-size:48px; margin-bottom:0;">No ETA, no go-live.</h2>
 
-    <div class="gl-table" style="margin-top:20px;">
-      <!-- Header row -->
-      <div style="display:grid; grid-template-columns:220px 1fr 100px; gap:28px; padding-bottom:12px; border-bottom:1px solid #1a1a1a;">
-        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Confidence</div>
-        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Deviation range</div>
-        <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; text-align:right;">% Online</div>
+    <div class="conf-layout">
+      <!-- Vertical confidence arrow -->
+      <div class="conf-arrow-col">
+        <span class="conf-arrow-label top">Confidence</span>
+        <div class="conf-arrow-line"></div>
+        <div class="conf-arrow-tip"></div>
+        <span class="conf-arrow-label bot">Uncertainty</span>
       </div>
 
-      <!-- High -->
-      <div class="gl-row" style="grid-template-columns:220px 1fr 100px;">
-        <div>
-          <div class="gl-case" style="color:#0055FF;">High confidence</div>
-          <div class="gl-desc">High reliability · daily/weekly updates · long planning horizon</div>
+      <!-- Table -->
+      <div class="conf-table-wrap">
+        <!-- Header -->
+        <div class="conf-row-head">
+          <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Data situation</div>
+          <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;">Deviation range</div>
+          <div style="font-size:11px; color:#444; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; text-align:right;">% Online</div>
         </div>
-        <div class="gl-bar-wrap">
-          <div class="gl-axis"></div>
-          <div class="gl-range ideal"></div>
-        </div>
-        <div><span class="gl-pct-num ideal">~100%</span></div>
-      </div>
 
-      <!-- Medium-High -->
-      <div class="gl-row" style="grid-template-columns:220px 1fr 100px;">
-        <div>
-          <div class="gl-case" style="color:#0088CC;">Medium-high</div>
-          <div class="gl-desc">High reliability · regular updates · solid planning horizon</div>
+        <div class="conf-row">
+          <div class="gl-desc" style="font-size:14px;">High reliability &middot; daily/weekly updates &middot; long horizon</div>
+          <div class="gl-bar-wrap"><div class="gl-axis"></div><div class="gl-range ideal"></div></div>
+          <div><span class="gl-pct-num ideal" style="font-size:22px;">~100%</span></div>
         </div>
-        <div class="gl-bar-wrap">
-          <div class="gl-axis"></div>
-          <div class="gl-range good"></div>
+        <div class="conf-row">
+          <div class="gl-desc" style="font-size:14px;">High reliability &middot; regular updates &middot; solid horizon</div>
+          <div class="gl-bar-wrap"><div class="gl-axis"></div><div class="gl-range good"></div></div>
+          <div><span class="gl-pct-num good" style="font-size:22px;">~70%</span></div>
         </div>
-        <div><span class="gl-pct-num good">~70%</span></div>
-      </div>
+        <div class="conf-row">
+          <div class="gl-desc" style="font-size:14px;">Medium reliability &middot; medium data availability</div>
+          <div class="gl-bar-wrap"><div class="gl-axis"></div><div class="gl-range medium"></div></div>
+          <div><span class="gl-pct-num medium" style="font-size:22px;">~40%</span></div>
+        </div>
+        <div class="conf-row">
+          <div class="gl-desc" style="font-size:14px;">Volatile delivery &middot; no/low data &middot; short horizon</div>
+          <div class="gl-bar-wrap"><div class="gl-axis"></div><div class="gl-range hard"></div></div>
+          <div><span class="gl-pct-num hard" style="font-size:22px;">&lt;20%</span></div>
+        </div>
 
-      <!-- Medium -->
-      <div class="gl-row" style="grid-template-columns:220px 1fr 100px;">
-        <div>
-          <div class="gl-case" style="color:#CC7700;">Medium</div>
-          <div class="gl-desc">Medium reliability · medium data availability · solid planning horizon</div>
-        </div>
-        <div class="gl-bar-wrap">
-          <div class="gl-axis"></div>
-          <div class="gl-range medium"></div>
-        </div>
-        <div><span class="gl-pct-num medium">~40%</span></div>
+        <p style="font-size:11px; color:#444; margin-top:14px; font-style:italic; border-top:1px solid #1a1a1a; padding-top:10px;">Deviation range and % online are independent — actual combination depends on OEM data quality and reliability.</p>
       </div>
-
-      <!-- Low -->
-      <div class="gl-row" style="grid-template-columns:220px 1fr 100px;">
-        <div>
-          <div class="gl-case" style="color:#CC3300;">Low confidence</div>
-          <div class="gl-desc">Volatile delivery · no/low data availability · short planning horizon</div>
-        </div>
-        <div class="gl-bar-wrap">
-          <div class="gl-axis"></div>
-          <div class="gl-range hard"></div>
-        </div>
-        <div><span class="gl-pct-num hard">&lt;20%</span></div>
-      </div>
-    </div>
-
-    <div class="gl-legend">
-      <span style="color:#0055FF;">Narrow deviation &rarr; high confidence</span>
-      <span style="color:#CC3300;">Wide deviation &rarr; cars go offline or stay offline</span>
     </div>
   </section>
 
@@ -778,13 +810,13 @@
       </div>
 
       <div class="oem-row">
-        <div class="oem-factor"><strong>1.1</strong> Delivery timing</div>
+        <div class="oem-factor"><strong>1.1</strong> Delivery reliability</div>
         <div class="oem-cell"><span class="rpill high">High</span></div>
         <div class="oem-cell"><span class="rpill high">High</span></div>
         <div class="oem-cell"><span class="rpill low">Low</span></div>
       </div>
       <div class="oem-row">
-        <div class="oem-factor"><strong>1.2</strong> Config selection</div>
+        <div class="oem-factor"><strong>1.2</strong> Config reliability</div>
         <div class="oem-cell"><span class="rpill high">High</span></div>
         <div class="oem-cell"><span class="rpill medium">Medium</span></div>
         <div class="oem-cell"><span class="rpill high">High</span></div>
@@ -815,19 +847,22 @@
       </div>
     </div>
 
-    <div class="zoom-box">
-      <div class="zoom-box-label">Zoom in: Stellantis</div>
+    <div class="zoom-box" style="margin-top:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div class="zoom-box-label" style="margin-bottom:0;">Zoom in</div>
+        <span style="font-size:12px; font-weight:700; color:#CC9900; letter-spacing:0.06em;">Stellantis</span>
+      </div>
       <div class="zoom-points">
-        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text"><strong>Delivery plan adherence:</strong> Stellantis has difficulties following contractual delivery plans per month — but typically delivers within an 8–10 week window.</div></div>
-        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text"><strong>Activation risk:</strong> When Stellantis delivers in the agreed month, the activation window is relatively narrow — risk of underutilization and extra costs if cars don't sell.</div></div>
-        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text"><strong>Until March:</strong> Only limited production/transportation data available — ETA logic relied mainly on delivery plan + verbal information from OEM.</div></div>
-        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text"><strong>Batch ordering:</strong> Stellantis orders internally only quarterly — limits our planning horizon to ~3 months and keeps remaining volume highly uncertain.</div></div>
+        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:14px;"><strong>Delivery timing:</strong> Struggles with monthly plan adherence — but typically delivers within an 8–10 week window.</div></div>
+        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:14px;"><strong>Underutilization risk:</strong> When delivery lands in the agreed month, activation window is narrow — risk of unsold cars and extra costs.</div></div>
+        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:14px;"><strong>Until March:</strong> Limited production/transport data — ETA relied on delivery plan + verbal OEM info only.</div></div>
+        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:14px;"><strong>Quarterly batches:</strong> Internal orders placed quarterly → planning horizon limited to ~3 months, remainder highly uncertain.</div></div>
       </div>
     </div>
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SLIDE 16 (new order) — ETA VS. GO-LIVE: HOW WE HANDLE IT
+       SLIDE 13 — ETA VS. GO-LIVE: HOW WE HANDLE IT
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <section class="slide tall" data-section="ETA vs. Go-Live">
     <div class="eyebrow">05 &mdash; ETA vs. Website Go-Live</div>
@@ -868,53 +903,54 @@
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        SLIDE — TARGET PICTURE: ETAs & AVAILABILITY
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide tall" data-section="Target Picture">
+  <section class="slide tall" data-section="Target Picture" style="padding-top:52px;">
     <div class="eyebrow">06 &mdash; Target Picture</div>
-    <h2 style="font-size:46px; letter-spacing:-1.5px;">Reduce risk upstream.<br>Manage it downstream.</h2>
+    <h2 style="font-size:44px; letter-spacing:-1.5px; margin-bottom:0;">Reduce risk upstream.<br>Manage it downstream.</h2>
 
-    <div class="target-cols">
-      <div class="target-col">
-        <div class="target-col-head reduce">Reducing risk (upstream)</div>
-        <div class="target-points">
-          <div class="target-point">
-            <div class="target-pt reduce"></div>
-            <div class="target-text"><strong>Reliable delivery contracts</strong> — close contracts with clear delivery plans and enforce adherence as much as possible</div>
-          </div>
-          <div class="target-point">
-            <div class="target-pt reduce"></div>
-            <div class="target-text"><strong>Minimal config variety</strong> — fewer configurations reduce uncertainty in what arrives and when</div>
-          </div>
-          <div class="target-point">
-            <div class="target-pt reduce"></div>
-            <div class="target-text"><strong>Long data horizons</strong> — push OEMs for 3m+ planning data to enable reliable ETA forecasting</div>
-          </div>
+    <!-- Reducing risk -->
+    <div class="mgmt-section" style="margin-top:18px;">
+      <div class="mgmt-head">
+        <span class="mgmt-badge limited">Limited control</span>
+        <span class="mgmt-title dim">Reducing risk upstream</span>
+      </div>
+      <div class="mgmt-inline-bullets">
+        <span class="mgmt-inline-bullet">Reliable delivery contracts + enforcement</span>
+        <span class="mgmt-inline-bullet">Minimal config variety</span>
+        <span class="mgmt-inline-bullet">Long OEM data horizons (3m+)</span>
+      </div>
+    </div>
+
+    <div class="mgmt-divider"></div>
+
+    <!-- Managing risk -->
+    <div class="mgmt-section">
+      <div class="mgmt-head">
+        <span class="mgmt-badge inctrl">In control</span>
+        <span class="mgmt-title blue">Managing risk downstream</span>
+      </div>
+
+      <!-- Key message -->
+      <div class="mgmt-key">
+        If we manage config and timing deviations well via switching and targeted alternatives, we can <strong>significantly reduce communicated delivery windows</strong> &mdash; a win for customers and FINN.
+      </div>
+
+      <!-- How -->
+      <div class="mgmt-how">
+        <div class="mgmt-how-row">
+          <span class="mgmt-how-label">How</span>
+          <span class="mgmt-how-text">Switch to available cars at compound that meet the delivery window &mdash; invisible to customer, effective as baseline</span>
+        </div>
+        <div class="mgmt-how-row">
+          <span class="mgmt-how-label">How</span>
+          <span class="mgmt-how-text">Offer targeted alternatives close to signed config (color, minor features) &mdash; alternative booking process, potential upsell</span>
+        </div>
+        <div class="mgmt-how-row">
+          <span class="mgmt-how-label">How</span>
+          <span class="mgmt-how-text">Proper vehicle grouping where applicable to maximize efficiency</span>
         </div>
       </div>
 
-      <div class="target-divider"></div>
-
-      <div class="target-col">
-        <div class="target-col-head manage">Managing risk (downstream) — focus area</div>
-        <div class="target-points">
-          <div class="target-point">
-            <div class="target-pt manage"></div>
-            <div class="target-text"><strong>Switching to available cars:</strong> Proper matching to cars at compound that meet the delivery window — invisible to customer, effective as baseline</div>
-          </div>
-          <div class="target-point">
-            <div class="target-pt manage"></div>
-            <div class="target-text"><strong>Targeted alternatives:</strong> Offer customers cars close to their signed config (same model, different color, minor feature difference) — alternative car booking process, can include upselling</div>
-          </div>
-          <div class="target-point">
-            <div class="target-pt manage"></div>
-            <div class="target-text"><strong>Key insight:</strong> If we manage config and timing deviations well via switching and alternatives, we can <em>significantly reduce</em> communicated delivery windows — confident we can find good customer solutions</div>
-          </div>
-          <div class="target-point">
-            <div class="target-pt manage"></div>
-            <div class="target-text"><strong>Grouping:</strong> Proper grouping of vehicles where applicable to maximize efficiency</div>
-          </div>
-        </div>
-        <div class="target-note"><strong>Process:</strong> Structured asynchronous alignment format to be introduced — regular sync on risk appetite, planning horizon, and OEM status across CLM, Ops &amp; Growth.</div>
-      </div>
+      <div class="target-note"><strong>Process:</strong> Structured async alignment format to be introduced &mdash; regular sync on risk appetite, planning horizon &amp; OEM status across CLM, Ops &amp; Growth.</div>
     </div>
   </section>
 
@@ -924,7 +960,7 @@
   <section class="slide center" data-section="">
     <div class="rule" style="margin: 0 auto 36px;"></div>
     <div class="qa-q">Q&amp;A</div>
-    <p class="qa-sub">Questions, pushback, ideas.</p>
+    <p class="qa-sub">Questions, ideas.</p>
   </section>
 
 </div><!-- #deck -->
