@@ -394,11 +394,11 @@
       border-left: 7px solid transparent; border-right: 7px solid transparent;
       border-top: 12px solid #CC3300;
     }
-    .conf-row { display: grid; grid-template-columns: 1fr 200px 90px; gap: 24px; align-items: center; flex: 1; padding: 14px 0; border-bottom: 1px solid #161616; }
+    .conf-row { display: grid; grid-template-columns: 260px 1fr 100px; gap: 24px; align-items: center; flex: 1; padding: 14px 0; border-bottom: 1px solid #161616; }
     .conf-row:last-child { border-bottom: none; }
     .conf-table-wrap { flex: 1; display: flex; flex-direction: column; }
     .conf-row-head {
-      display: grid; grid-template-columns: 1fr 200px 90px;
+      display: grid; grid-template-columns: 260px 1fr 100px;
       gap: 24px; padding-bottom: 10px; border-bottom: 1px solid #1a1a1a;
     }
 
@@ -456,13 +456,13 @@
 
     /* ── Combinations callout (slide 10) ─────────────────── */
     .conf-combo {
-      position: absolute; right: 90px; top: 50%; transform: translateY(-50%);
-      background: #111; border: 1px solid #252525; border-radius: 10px;
-      padding: 10px 12px; text-align: center; width: 148px; z-index: 5;
+      position: absolute; right: 100px; top: 50%; transform: translateY(-50%);
+      background: #0f0f0f; border: 1px solid #333; border-radius: 12px;
+      padding: 14px 16px; text-align: center; width: 160px; z-index: 5;
     }
-    .conf-combo-x { font-size: 22px; color: #3a3a3a; margin-bottom: 5px; font-weight: 300; }
-    .conf-combo-text { font-size: 10px; color: #555; line-height: 1.55; }
-    .conf-combo-text strong { color: #666; font-weight: 600; display: block; margin-bottom: 3px; }
+    .conf-combo-x { font-size: 42px; color: #666; margin-bottom: 6px; font-weight: 200; line-height: 1; }
+    .conf-combo-text { font-size: 11px; color: #666; line-height: 1.55; }
+    .conf-combo-text strong { color: #888; font-weight: 600; display: block; margin-bottom: 4px; }
 
     /* ── Stellantis column highlight (slide 11) ──────────── */
     .oem-col-head.stellantis { color: #CC9900; border-bottom: 2px solid rgba(204,153,0,0.4); padding-bottom: 6px; }
@@ -503,7 +503,7 @@
   <section class="slide" data-section="What is an ETA?">
     <div class="eyebrow">01 &mdash; What is an ETA?</div>
     <h2>A prediction.<br>Not a promise.</h2>
-    <p class="subtitle">An ETA is our best estimate of when a vehicle arrives. Every prediction tracked &mdash; not just the last one before delivery.</p>
+    <p class="subtitle">An ETA is our best estimate of when a vehicle arrives.</p>
     <div class="stats-row">
       <div class="stat-block">
         <div class="stat-num dim">22.5%</div>
