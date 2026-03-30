@@ -479,6 +479,53 @@
     .oem-col-head.stellantis { color: #CC9900; border-bottom: 2px solid rgba(204,153,0,0.4); padding-bottom: 6px; }
     .oem-cell.stellantis { background: rgba(204,153,0,0.03); }
 
+    /* ── Target Picture (new) ────────────────────────────── */
+    .tp-cols {
+      display: grid; grid-template-columns: 1fr 1px 1.4fr;
+      gap: 0; margin-top: 36px; flex: 1;
+    }
+    .tp-col { padding: 0 44px; }
+    .tp-col:first-child { padding-left: 0; }
+    .tp-col:last-child { padding-right: 0; }
+    .tp-divider { background: #1c1c1c; }
+    .tp-col-tag {
+      display: inline-flex; align-items: center;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; padding: 4px 12px;
+      border-radius: 100px; margin-bottom: 14px;
+    }
+    .tp-col-tag-dim  { background: rgba(255,255,255,0.04); color: #555; border: 1px solid #2a2a2a; }
+    .tp-col-tag-blue { background: rgba(0,85,255,0.1); color: #5588FF; border: 1px solid rgba(0,85,255,0.25); }
+    .tp-col-title {
+      font-size: 20px; font-weight: 700; color: #fff;
+      margin-bottom: 22px; line-height: 1.2;
+    }
+    .tp-col-dim .tp-col-title { color: #666; }
+    .tp-items { display: flex; flex-direction: column; gap: 16px; }
+    .tp-item  { display: flex; gap: 12px; align-items: flex-start; }
+    .tp-dot   { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+    .tp-dot-dim  { background: #333; }
+    .tp-dot-blue { background: #0055FF; }
+    .tp-item-text { font-size: 16px; color: #999; line-height: 1.5; }
+    .tp-item-text strong { color: #ddd; font-weight: 600; }
+    .tp-col-dim .tp-item-text { color: #555; }
+    /* Outcomes strip */
+    .tp-outcomes {
+      display: flex; align-items: center; gap: 20px;
+      margin-top: 40px; padding-top: 24px;
+      border-top: 1px solid #1a1a1a;
+    }
+    .tp-outcome-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #444; white-space: nowrap;
+    }
+    .tp-outcome-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tp-pill {
+      font-size: 13px; font-weight: 500; color: #888;
+      background: rgba(255,255,255,0.03); border: 1px solid #222;
+      border-radius: 100px; padding: 7px 16px;
+    }
+
     /* ── Q&A ──────────────────────────────────────────────── */
     .qa-q { font-size: 100px; font-weight: 800; letter-spacing: -4px; line-height: 1; }
     .qa-sub { font-size: 20px; color: #444; margin-top: 24px; }
@@ -954,55 +1001,69 @@
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        SLIDE — TARGET PICTURE: ETAs & AVAILABILITY
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="slide tall" data-section="Target Picture" style="padding-top:52px;">
+  <section class="slide" data-section="Target Picture">
     <div class="eyebrow">06 &mdash; Target Picture</div>
-    <h2 style="margin-bottom:0;">Reduce risk upstream.<br>Manage it downstream.</h2>
+    <h2>Reduce risk.<br>Manage the rest.</h2>
 
-    <!-- Reducing risk -->
-    <div class="mgmt-section" style="margin-top:12px;">
-      <div class="mgmt-head">
-        <span class="mgmt-badge limited">Limited control</span>
-        <span class="mgmt-title dim">Reducing risk upstream</span>
+    <!-- Two-column layout -->
+    <div class="tp-cols">
+
+      <!-- LEFT: Limited control -->
+      <div class="tp-col tp-col-dim">
+        <div class="tp-col-tag tp-col-tag-dim">Limited control</div>
+        <div class="tp-col-title">Reduce risk upstream</div>
+        <div class="tp-items">
+          <div class="tp-item">
+            <div class="tp-dot tp-dot-dim"></div>
+            <div class="tp-item-text">Reliable delivery contracts &amp; enforcement</div>
+          </div>
+          <div class="tp-item">
+            <div class="tp-dot tp-dot-dim"></div>
+            <div class="tp-item-text">Minimal config variety</div>
+          </div>
+          <div class="tp-item">
+            <div class="tp-dot tp-dot-dim"></div>
+            <div class="tp-item-text">Long OEM data horizons (3m+)</div>
+          </div>
+        </div>
       </div>
-      <div class="mgmt-inline-bullets">
-        <span class="mgmt-inline-bullet">Reliable delivery contracts + enforcement</span>
-        <span class="mgmt-inline-bullet">Minimal config variety</span>
-        <span class="mgmt-inline-bullet">Long OEM data horizons (3m+)</span>
+
+      <!-- Divider -->
+      <div class="tp-divider"></div>
+
+      <!-- RIGHT: In control -->
+      <div class="tp-col tp-col-blue">
+        <div class="tp-col-tag tp-col-tag-blue">In control</div>
+        <div class="tp-col-title">Manage remaining risk</div>
+        <div class="tp-items">
+          <div class="tp-item">
+            <div class="tp-dot tp-dot-blue"></div>
+            <div class="tp-item-text"><strong>Switch</strong> to available compound vehicles that meet the delivery window</div>
+          </div>
+          <div class="tp-item">
+            <div class="tp-dot tp-dot-blue"></div>
+            <div class="tp-item-text"><strong>Targeted alternatives</strong> close to signed config &mdash; color, minor features</div>
+          </div>
+          <div class="tp-item">
+            <div class="tp-dot tp-dot-blue"></div>
+            <div class="tp-item-text"><strong>Async alignment</strong> format across CLM, Ops &amp; Growth on availability &amp; ETA strategy</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.tp-cols -->
+
+    <!-- Outcomes strip -->
+    <div class="tp-outcomes">
+      <div class="tp-outcome-label">FINN gets</div>
+      <div class="tp-outcome-pills">
+        <span class="tp-pill">Fewer delays</span>
+        <span class="tp-pill">Higher utilization</span>
+        <span class="tp-pill">Smaller delivery windows</span>
+        <span class="tp-pill">Happier customers</span>
       </div>
     </div>
 
-    <div class="mgmt-divider"></div>
-
-    <!-- Managing risk -->
-    <div class="mgmt-section">
-      <div class="mgmt-head">
-        <span class="mgmt-badge inctrl">In control</span>
-        <span class="mgmt-title blue">Managing risk downstream</span>
-      </div>
-
-      <!-- Key message -->
-      <div class="mgmt-key">
-        If we manage config and timing deviations well via switching and targeted alternatives, we can <strong>significantly reduce communicated delivery windows</strong> &mdash; a win for customers and FINN.
-      </div>
-
-      <!-- How -->
-      <div class="mgmt-how">
-        <div class="mgmt-how-row">
-          <span class="mgmt-how-label">How</span>
-          <span class="mgmt-how-text">Switch to available cars at compound that meet the delivery window &mdash; invisible to customer, effective as baseline</span>
-        </div>
-        <div class="mgmt-how-row">
-          <span class="mgmt-how-label">How</span>
-          <span class="mgmt-how-text">Offer targeted alternatives close to signed config (color, minor features) &mdash; alternative booking process, potential upsell</span>
-        </div>
-        <div class="mgmt-how-row">
-          <span class="mgmt-how-label">How</span>
-          <span class="mgmt-how-text">Proper vehicle grouping where applicable to maximize efficiency</span>
-        </div>
-      </div>
-
-      <div class="target-note"><strong>Process:</strong> Structured async alignment format to be introduced &mdash; regular sync on risk appetite, planning horizon &amp; OEM status across CLM, Ops &amp; Growth.</div>
-    </div>
   </section>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
