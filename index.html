@@ -544,10 +544,10 @@
 
     /* ── Target Picture (new) ────────────────────────────── */
     .tp-cols {
-      display: grid; grid-template-columns: 1fr 1px 1.4fr;
-      gap: 0; margin-top: 36px; flex: 1;
+      display: grid; grid-template-columns: 1fr 1px 1.5fr;
+      gap: 0; margin-top: 32px;
     }
-    .tp-col { padding: 0 44px; }
+    .tp-col { padding: 0 40px; }
     .tp-col:first-child { padding-left: 0; }
     .tp-col:last-child { padding-right: 0; }
     .tp-divider { background: #1c1c1c; }
@@ -557,25 +557,30 @@
       text-transform: uppercase; padding: 4px 12px;
       border-radius: 100px; margin-bottom: 14px;
     }
-    .tp-col-tag-dim  { background: rgba(255,255,255,0.04); color: #555; border: 1px solid #2a2a2a; }
-    .tp-col-tag-blue { background: rgba(0,85,255,0.1); color: #5588FF; border: 1px solid rgba(0,85,255,0.25); }
+    .tp-col-tag-amber { background: rgba(204,153,0,0.1); color: #CC9900; border: 1px solid rgba(204,153,0,0.28); }
+    .tp-col-tag-blue  { background: rgba(0,85,255,0.1); color: #5588FF; border: 1px solid rgba(0,85,255,0.25); }
     .tp-col-title {
       font-size: 20px; font-weight: 700; color: #fff;
-      margin-bottom: 22px; line-height: 1.2;
+      margin-bottom: 20px; line-height: 1.2;
     }
-    .tp-col-dim .tp-col-title { color: #666; }
-    .tp-items { display: flex; flex-direction: column; gap: 16px; }
+    .tp-items { display: flex; flex-direction: column; gap: 13px; }
     .tp-item  { display: flex; gap: 12px; align-items: flex-start; }
     .tp-dot   { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
-    .tp-dot-dim  { background: #333; }
-    .tp-dot-blue { background: #0055FF; }
-    .tp-item-text { font-size: 16px; color: #999; line-height: 1.5; }
+    .tp-dot-amber { background: #AA8800; }
+    .tp-dot-blue  { background: #0055FF; }
+    .tp-item-text { font-size: 15px; color: #999; line-height: 1.5; }
     .tp-item-text strong { color: #ddd; font-weight: 600; }
-    .tp-col-dim .tp-item-text { color: #555; }
+    .tp-sub-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #444;
+      margin-bottom: 10px; margin-top: 18px;
+      padding-bottom: 6px; border-bottom: 1px solid #1a1a1a;
+    }
+    .tp-sub-label:first-of-type { margin-top: 0; }
     /* Outcomes strip */
     .tp-outcomes {
       display: flex; align-items: center; gap: 20px;
-      margin-top: 40px; padding-top: 24px;
+      margin-top: 32px; padding-top: 20px;
       border-top: 1px solid #1a1a1a;
     }
     .tp-outcome-label {
@@ -726,7 +731,7 @@
       </div>
       <div class="point">
         <div class="pt"></div>
-        <div class="pt-text"><strong>Blocked logistics routes</strong> &mdash; Suez, Red Sea, or other sea route disruptions</div>
+        <div class="pt-text"><strong>Blocked logistics routes</strong> &mdash; Suez, Red Sea, or other supply chain disruptions</div>
       </div>
       <div class="point">
         <div class="pt"></div>
@@ -1007,8 +1012,8 @@
         <span style="font-size:13px; font-weight:700; color:#CC9900; letter-spacing:0.06em;">Stellantis</span>
       </div>
       <div class="zoom-points">
-        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:15px;"><strong>Delivery timing:</strong> Struggles with monthly plan adherence — but typically delivers within an 8–10 week window.</div></div>
-        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:15px;"><strong>Quarterly batches:</strong> Internal orders placed quarterly → planning horizon limited to ~3 months, remainder highly uncertain.</div></div>
+        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:15px;"><strong>Delivery timing:</strong> Stellantis struggles with monthly plan adherence — but typically delivers within an 8–10 week window.</div></div>
+        <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:15px;"><strong>Quarterly batches:</strong> Stellantis places internal production orders quarterly → planning horizon limited to ~3 months, remainder highly uncertain.</div></div>
         <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:15px;"><strong>Until March:</strong> Limited production/transport data — ETA relied on delivery plan + verbal OEM info only.</div></div>
         <div class="zoom-point"><div class="zoom-pt"></div><div class="zoom-text" style="font-size:15px;"><strong>Underutilization risk:</strong> When delivery lands in the agreed month, activation window is narrow — risk of unsold cars and extra costs.</div></div>
       </div>
@@ -1065,20 +1070,20 @@
     <div class="tp-cols">
 
       <!-- LEFT: Limited control -->
-      <div class="tp-col tp-col-dim">
-        <div class="tp-col-tag tp-col-tag-dim">Limited control</div>
+      <div class="tp-col">
+        <div class="tp-col-tag tp-col-tag-amber">Limited control</div>
         <div class="tp-col-title">Reduce risk upstream</div>
         <div class="tp-items">
           <div class="tp-item">
-            <div class="tp-dot tp-dot-dim"></div>
+            <div class="tp-dot tp-dot-amber"></div>
             <div class="tp-item-text">Reliable delivery contracts &amp; enforcement</div>
           </div>
           <div class="tp-item">
-            <div class="tp-dot tp-dot-dim"></div>
+            <div class="tp-dot tp-dot-amber"></div>
             <div class="tp-item-text">Minimal config variety</div>
           </div>
           <div class="tp-item">
-            <div class="tp-dot tp-dot-dim"></div>
+            <div class="tp-dot tp-dot-amber"></div>
             <div class="tp-item-text">Long OEM data horizons (3m+)</div>
           </div>
         </div>
@@ -1091,6 +1096,8 @@
       <div class="tp-col tp-col-blue">
         <div class="tp-col-tag tp-col-tag-blue">In control</div>
         <div class="tp-col-title">Manage remaining risk</div>
+
+        <div class="tp-sub-label">Toolbox</div>
         <div class="tp-items">
           <div class="tp-item">
             <div class="tp-dot tp-dot-blue"></div>
@@ -1102,7 +1109,19 @@
           </div>
           <div class="tp-item">
             <div class="tp-dot tp-dot-blue"></div>
+            <div class="tp-item-text"><strong>Grouping</strong> configs with high similarity on website</div>
+          </div>
+        </div>
+
+        <div class="tp-sub-label">Steering</div>
+        <div class="tp-items">
+          <div class="tp-item">
+            <div class="tp-dot tp-dot-blue"></div>
             <div class="tp-item-text"><strong>Async alignment</strong> format across CLM, Ops &amp; Growth on availability &amp; ETA strategy</div>
+          </div>
+          <div class="tp-item">
+            <div class="tp-dot tp-dot-blue"></div>
+            <div class="tp-item-text"><strong>Regular updates</strong> on status and performance</div>
           </div>
         </div>
       </div>
@@ -1116,6 +1135,7 @@
         <span class="tp-pill">Fewer delays</span>
         <span class="tp-pill">Higher utilization</span>
         <span class="tp-pill">Smaller delivery windows</span>
+        <span class="tp-pill">Attractive assortment</span>
         <span class="tp-pill">Happier customers</span>
       </div>
     </div>
